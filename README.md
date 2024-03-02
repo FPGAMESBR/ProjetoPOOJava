@@ -1,2 +1,2 @@
 # Projeto-POO-Java
-Projeto intencionista de POO
+Projeto Extensionista de POO
