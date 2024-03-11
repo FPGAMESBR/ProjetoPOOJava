@@ -1,0 +1,12 @@
+Requisitos Funcionais:
+
+1. Adição, edição e remoção de informações sobre os alunos
+2. Filtro de busca dos alunos por nome, cpf ou rg
+3. Visualização geral de todas informações adicionadas dos alunos
+4. Login e cadastro de usuário
+
+Requisitos Não Funcionais:
+
+1. Segurança: A aplicação deve garantir a segurança dos dados dos usuários através de criptografia e autenticação segura.
+2. Performance: A aplicação deve ser responsiva e apresentar tempos de carregamento mínimos.
+3. Usabilidade: A interface da aplicação deve ser intuitiva e de fácil utilização.
