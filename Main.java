@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Franklin {
+public class Main {
     private String nome;
     private int idade;
     private float altura;
