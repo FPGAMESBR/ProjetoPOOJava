@@ -15,5 +15,29 @@ public class Main {
 
         System.out.println("Digite a idade do aluno: ");
         int idadeAluno = leitura.nextInt();
+        leitura.nextLine();
+
+        System.out.println("Digite a altura do aluno (em metros): ");
+        float alturaAluno = leitura.nextFloat();
+        leitura.nextLine();
+
+        System.out.println("Digite o peso do aluno (em quilogramas): ");
+        float pesoAluno = leitura.nextFloat();
+        leitura.nextLine();
+
+        System.out.println("Digite o sexo do aluno (M/F): ");
+        char sexoAluno = leitura.next().charAt(0);
+        leitura.close();
+
+        Main aluno = new Main(nomeAluno, idadeAluno, alturaAluno, pesoAluno, sexoAluno);
+    }
+
+
+    public Main(String nome, int idade, float altura, float peso, char sexo) {
+        this.nome = nome;
+        this.idade = idade;
+        this.altura = altura;
+        this.peso = peso;
+        this.sexo = sexo;
     }
 }

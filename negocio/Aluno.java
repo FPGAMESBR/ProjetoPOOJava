@@ -1,6 +1,6 @@
 package negocio;
 
-import java.util.Scanner;
+import javax.swing.*;
 
 public class Aluno {
     private String nome;
@@ -61,21 +61,4 @@ public class Aluno {
     public char getSexo() {
         return sexo;
     }
-
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
-
-    //public static void main(String[] args) {
-        //Scanner leitura = new Scanner(System.in);
-
-        //negocio.Aluno aluno = new negocio.Aluno();  //Instância da classe negocio.Aluno
-
-        //System.out.println("Digite o nome do aluno: ");
-        //aluno.nome = leitura.nextLine();
-
-        //System.out.println("Digite a idade do aluno: ");
-        //aluno.idade = leitura.nextInt();
-    //}
-
 }
