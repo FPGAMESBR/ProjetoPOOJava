@@ -46,6 +46,7 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     margin-top: -50px;
     margin-left: 50px;
+    flex-direction: column;
   }
   
   .folder {
@@ -58,14 +59,7 @@
     margin-bottom: 20px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s; /* Adiciona uma transição suave ao passar o mouse */
   }
-  
-  .folder:hover,
-.folder.hovered { /* Aplica o estilo quando o botão é clicado ou quando o mouse passa sobre ele */
-  background-color: #f0f0f0; /* Altera a cor de fundo ao passar o mouse */
-}
-
   
   .folder-icon {
     margin-bottom: 8px;

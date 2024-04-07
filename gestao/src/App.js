@@ -14,7 +14,6 @@ function YearDetails({ match }) {
 }
 
 function App() {
-  // Função para lidar com o clique do botão
   const handleButtonClick = (year) => {
     // Redirecionar o usuário para a página YearDetails com o ano selecionado
     window.location.href = `/year/${year}`;
