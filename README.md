@@ -3,7 +3,7 @@ Projeto Extensionista de POO
 
 # Pré-Requisitos
 Node.JS
-Java 21 (Zulu OpenJDK)
+Java 17 (OpenJDK)
 MySQL DataBase
 React
 
