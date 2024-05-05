@@ -1,0 +1,65 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* App.css */
+
+.blackboard {
+    background-color: rgb(9, 75, 63);
+    width: 80%;
+    max-width: 1000px;
+    padding: 120px 120px 50px 120px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    border: 10px solid #8b5c2b; /* Adicionando a borda de madeira */
+  }
+  
+  .blackboard::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 10px solid #8b5c2b; /* Adicionando a borda de madeira para a borda externa */
+    border-radius: 20px; /* Arredondando a borda para combinar com o quadro */
+  }
+   
+.folders {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    margin-top: -50px;
+    margin-left: 50px;
+    flex-direction: column;
+  }
+  
+  .folder {
+    background-color: rgb(255, 222, 128);
+    padding: 23px;
+    border-radius: 15px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    text-align: center;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .folder-icon {
+    margin-bottom: 8px;
+    font-size: 24px; /* Defina o tamanho do ícone conforme necessário */
+  }
