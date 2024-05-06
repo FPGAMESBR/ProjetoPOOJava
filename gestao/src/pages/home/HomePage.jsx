@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './home.css';
+import { useNavigate } from 'react-router-dom';
+import './Home.css';
 import Modal from './Modal.js';
 import './../../assets/fontawesome-pro-6.5.2-web/css/all.min.css';
 
@@ -67,7 +68,18 @@ const HomePage = () => {
       localStorage.setItem('events', JSON.stringify(updatedEvents));
     }
   };  
-  
+
+  const navigate = useNavigate();
+  const goToYears = () => {
+    navigate('/years');
+  }
+  const goToTeachers = () => {
+    navigate('/teachers');
+  }
+  const goToDisciplines = () => {
+    navigate('/disc'); 
+  } 
+
   // Função para deletar um evento
   const deleteEvent = () => {
     // Excluir o evento existente
@@ -117,9 +129,9 @@ const HomePage = () => {
         </div>
         <div className="content">
           <div className="top">
-            <div className="button"><i className="fas fa-calendar-alt"></i> Anos</div>
-            <div className="button"><i className="fas fa-graduation-cap"></i> Professores</div>
-            <div className="button"><i className="fas fa-book-open"></i> Disciplinas</div>
+            <div className="button" data-testid='page-button' onClick={goToYears}><i className="fas fa-calendar-alt"></i> Anos</div>
+            <div className="button" data-testid='page-button' onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
+            <div className="button" data-testid='page-button' onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
           </div>
           <div className="calendar">
             <div className="calendar">
