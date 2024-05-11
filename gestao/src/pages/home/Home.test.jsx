@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event"
 import HomePage from "./HomePage"
 import YearPage from "../years/YearPage"
 import TeacherPage from "../teachers/TeacherPage"
-import DiscPage from "../disc/DiscPage"
+import DiscPage from "../disc/discpage"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {

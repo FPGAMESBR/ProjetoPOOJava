@@ -2,7 +2,7 @@ import './app.css';
 import HomePage from './pages/home/HomePage';
 import YearPage from './pages/years/YearPage';
 import TeacherPage from './pages/teachers/TeacherPage';
-import DiscPage from './pages/disciplines/DiscPage';
+import DiscPage from './pages/disciplines/discpage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
