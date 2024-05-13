@@ -7,6 +7,7 @@ const HomePage = () => {
   const [events, setEvents] = useState({});
   const [selectedMonth, setSelectedMonth] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null); // Novo estado para o evento selecionado
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [eventDescription, setEventDescription] = useState('');
   const [extraInfo, setExtraInfo] = useState('');
@@ -27,54 +28,31 @@ const HomePage = () => {
     });
   };
 
-  const addEvent = (description, extraInfo) => {
-    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay);
-    const formattedDate = selectedDate.toISOString().split('T')[0];
-    const updatedEvents = { ...events };
-    updatedEvents[formattedDate] = { description, extraInfo };
-    setEvents(updatedEvents);
-    closeModal();
-    localStorage.setItem('events', JSON.stringify(updatedEvents));
-  };
-
-  const openAddModal = () => {
-    setIsModalOpen(true);
-    setEventDescription('');
-    setExtraInfo('');
-  };
-  
-  const openViewModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleDayClick = (day) => {
-    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
-    const formattedDate = selectedDate.toISOString().split('T')[0];
-    setSelectedDay(formattedDate);
-    if (events[formattedDate]) {
-      openViewModal(); // Abre o modal de visualização se houver um evento
-    } else {
-      openAddModal(); // Abre o modal de adicionar se não houver evento
-    }
-  };
-  
-
   const deleteEvent = () => {
     // Verifica se há um dia selecionado e se selectedMonth é uma data válida
-    if (selectedDay !== null && selectedMonth instanceof Date && !isNaN(selectedMonth)) {
+    if (selectedDay instanceof Date && !isNaN(selectedDay)) {
       console.log("selectedDay:", selectedDay);
       console.log("selectedMonth:", selectedMonth);
   
       // Cria uma nova data com o ano, mês e dia selecionados
-      const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay);
+      const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay.getDate());
       console.log("selectedDate:", selectedDate);
+  
+      // Verifica se a data é válida antes de prosseguir
+      if (!(selectedDate instanceof Date) || isNaN(selectedDate)) {
+        console.error("selectedDate é inválido:", selectedDate);
+        return;
+      }
   
       // Formata a data para o formato 'YYYY-MM-DD'
       const formattedDate = selectedDate.toISOString().split('T')[0];
       console.log("formattedDate:", formattedDate);
-    
+  
+      // Exclui o evento para o dia selecionado, se existir
       const updatedEvents = { ...events };
       delete updatedEvents[formattedDate];
+  
+      // Atualiza o estado dos eventos e salva no localStorage
       setEvents(updatedEvents);
       localStorage.setItem('events', JSON.stringify(updatedEvents));
       closeModal(); // Fechar o modal
@@ -83,7 +61,64 @@ const HomePage = () => {
     }
   };
   
+  const addEvent = (description, extraInfo) => {
+    // Verifica se selectedDay é um objeto Date válido
+    if (!(selectedDay instanceof Date) || isNaN(selectedDay)) {
+      console.error("selectedDay é inválido:", selectedDay);
+      return;
+    }
   
+    // Verifica se selectedMonth é uma data válida
+    if (!(selectedMonth instanceof Date) || isNaN(selectedMonth)) {
+      console.error("selectedMonth é inválido:", selectedMonth);
+      return;
+    }
+  
+    // Cria uma nova data com o ano, mês e dia selecionados
+    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay.getDate());
+  
+    // Verifica se a data é válida antes de prosseguir
+    if (!(selectedDate instanceof Date) || isNaN(selectedDate)) {
+      console.error("selectedDate é inválido:", selectedDate);
+      return;
+    }
+  
+    console.log("Selected date:", selectedDate);
+  
+    // Formata a data para o formato 'YYYY-MM-DD'
+    const formattedDate = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
+  
+    console.log("Formatted date:", formattedDate);
+  
+    const updatedEvents = { ...events };
+    updatedEvents[formattedDate] = { description, extraInfo };
+    console.log("Updated events:", updatedEvents);
+    setEvents(updatedEvents);
+    closeModal();
+    localStorage.setItem('events', JSON.stringify(updatedEvents));
+  };  
+  
+
+  const openAddModal = () => {
+    setIsModalOpen(true);
+    setEventDescription('');
+    setExtraInfo('');
+  };
+
+  const openViewModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleDayClick = (day) => {
+    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
+    setSelectedDay(selectedDate); // Definir selectedDay como uma instância de Date
+    if (events[selectedDate.toISOString().split('T')[0]]) {
+      setSelectedEvent(events[selectedDate.toISOString().split('T')[0]]); // Define o evento selecionado
+      openViewModal(); // Abre o modal de visualização se houver um evento
+    } else {
+      openAddModal(); // Abre o modal de adicionar se não houver evento
+    }
+  };
 
   const navigate = useNavigate();
   const goToYears = () => navigate('/years');
@@ -149,8 +184,11 @@ const HomePage = () => {
         deleteEvent={deleteEvent}
         extraInfo={extraInfo}
         setExtraInfo={setExtraInfo}
-        selectedEvent={events[selectedDay]} // Passa o evento selecionado, se existir
-        closeViewModal={() => setSelectedDay(null)} // Função para fechar o modal de visualização
+        selectedEvent={selectedEvent} // Passa o evento selecionado, se existir
+        closeViewModal={() => {
+          setSelectedDay(null);
+          setSelectedEvent(null); // Limpa o evento selecionado
+        }} // Função para fechar o modal de visualização
       />
     </div>
   );
