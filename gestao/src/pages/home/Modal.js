@@ -27,16 +27,16 @@ const Modal = ({ isOpen, onRequestClose, addEvent, eventDescription, setEventDes
               onChange={(e) => setExtraInfo(e.target.value)}
               placeholder="Informações extras"
             />
-            <button onClick={() => addEvent(eventDescription, extraInfo)}>Adicionar</button>
-            <button onClick={onRequestClose}>Cancelar</button>
+            <button className="modalButton" onClick={() => addEvent(eventDescription, extraInfo)}>Adicionar</button>
+            <button className="modalButton" onClick={onRequestClose}>Cancelar</button>
           </>
         )}
         {!isAddingEvent && (
           <>
             <p><strong>Nome do evento:</strong> {selectedEvent.description}</p>
             <p><strong>Informações extras:</strong> {selectedEvent.extraInfo}</p>
-            <button onClick={deleteEvent}>Excluir</button>
-            <button onClick={closeViewModal}>Fechar</button>
+            <button className="modalButton" onClick={deleteEvent}>Excluir</button>
+            <button className="modalButton" onClick={closeViewModal}>Fechar</button>
           </>
         )}
       </div>

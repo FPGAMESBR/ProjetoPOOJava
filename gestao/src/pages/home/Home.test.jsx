@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import HomePage from "./HomePage";
+import HomePage from "./homepage";
 import YearPage from "../years/YearPage";
 import TeacherPage from "../teachers/TeacherPage";
 import DiscPage from "../disc/discpage";

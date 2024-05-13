@@ -1,6 +1,8 @@
+import '../../assets/fontawesome-pro-6.5.2-web/css/all.min.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import logo from '../../assets/pngtree-school.png';
 import Modal from './Modal.js';
 
 const HomePage = () => {
@@ -17,8 +19,10 @@ const HomePage = () => {
     setEvents(savedEvents || {});
   }, []);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const closeModalAndView = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null); // Limpa o evento selecionado ao fechar o modal
+  };
 
   const changeMonth = (amount) => {
     setSelectedMonth(prevMonth => {
@@ -30,31 +34,16 @@ const HomePage = () => {
 
   const deleteEvent = () => {
     if (selectedDay instanceof Date && !isNaN(selectedDay)) {
-      console.log("selectedDay:", selectedDay);
-      console.log("selectedMonth:", selectedMonth);
-  
-      // Cria uma nova data com o ano, mês e dia selecionados
       const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay.getDate());
-      console.log("selectedDate:", selectedDate);
-  
-      // Verifica se a data é válida antes de prosseguir
-      if (!(selectedDate instanceof Date) || isNaN(selectedDate)) {
-        console.error("selectedDate é inválido:", selectedDate);
-        return;
-      }
-  
-      // Formata a data para o formato 'YYYY-MM-DD'
-      const formattedDate = selectedDate.toISOString().split('T')[0];
-      console.log("formattedDate:", formattedDate);
   
       // Exclui o evento para o dia selecionado, se existir
       const updatedEvents = { ...events };
-      delete updatedEvents[formattedDate];
+      delete updatedEvents[selectedDate.toISOString().split('T')[0]];
   
       // Atualiza o estado dos eventos e salva no localStorage
       setEvents(updatedEvents);
       localStorage.setItem('events', JSON.stringify(updatedEvents));
-      closeModal(); // Fechar o modal
+      closeModalAndView(); // Fechar o modal
       setSelectedDay(null); // Define selectedDay como null após excluir o evento
     } else {
       console.log("Valor inválido encontrado. selectedDay:", selectedDay, "selectedMonth:", selectedMonth);
@@ -62,42 +51,29 @@ const HomePage = () => {
   };
   
   const addEvent = (description, extraInfo) => {
-    // Verifica se selectedDay é um objeto Date válido
     if (!(selectedDay instanceof Date) || isNaN(selectedDay)) {
       console.error("selectedDay é inválido:", selectedDay);
       return;
     }
   
-    // Verifica se selectedMonth é uma data válida
     if (!(selectedMonth instanceof Date) || isNaN(selectedMonth)) {
       console.error("selectedMonth é inválido:", selectedMonth);
       return;
     }
   
-    // Cria uma nova data com o ano, mês e dia selecionados
     const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay.getDate());
   
-    // Verifica se a data é válida antes de prosseguir
     if (!(selectedDate instanceof Date) || isNaN(selectedDate)) {
       console.error("selectedDate é inválido:", selectedDate);
       return;
     }
   
-    console.log("Selected date:", selectedDate);
-  
-    // Formata a data para o formato 'YYYY-MM-DD'
-    const formattedDate = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
-  
-    console.log("Formatted date:", formattedDate);
-  
     const updatedEvents = { ...events };
-    updatedEvents[formattedDate] = { description, extraInfo };
-    console.log("Updated events:", updatedEvents);
+    updatedEvents[selectedDate.toISOString().split('T')[0]] = { description, extraInfo };
     setEvents(updatedEvents);
-    closeModal();
+    closeModalAndView();
     localStorage.setItem('events', JSON.stringify(updatedEvents));
   };  
-  
 
   const openAddModal = () => {
     setIsModalOpen(true);
@@ -110,23 +86,16 @@ const HomePage = () => {
     setIsModalOpen(true);
   };
 
-  const closeAddModal = () => {
-    setIsModalOpen(false);
-  };
-  
-  const closeModalAndView = () => {
-    setIsModalOpen(false);
-    setSelectedEvent(null); // Limpa o evento selecionado ao fechar o modal
-  };
-
   const handleDayClick = (day) => {
-    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
-    setSelectedDay(selectedDate); // Definir selectedDay como uma instância de Date
-    if (events[selectedDate.toISOString().split('T')[0]]) {
-      setSelectedEvent(events[selectedDate.toISOString().split('T')[0]]); // Define o evento selecionado
-      openViewModal(); // Abre o modal de visualização se houver um evento
-    } else {
-      openAddModal(); // Abre o modal de adicionar se não houver evento
+    if (day > 0) {
+      const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
+      setSelectedDay(selectedDate); // Definir selectedDay como uma instância de Date
+      if (events[selectedDate.toISOString().split('T')[0]]) {
+        setSelectedEvent(events[selectedDate.toISOString().split('T')[0]]); // Define o evento selecionado
+        openViewModal(); // Abre o modal de visualização se houver um evento
+      } else {
+        openAddModal(); // Abre o modal de adicionar se não houver evento
+      }
     }
   };
 
@@ -139,7 +108,6 @@ const HomePage = () => {
   const daysInMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0).getDate();
   const firstDayOfMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 1).getDay();
 
-  // Definição dos dias da semana e meses
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
@@ -153,9 +121,10 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <div className="menu">
-        <div className="menu-item">Início</div>
-      </div>
+    <div className="menu">
+      <img src={logo} className="logo" alt="Logo da Escola" />
+      <div className="menu-item">Início</div>
+    </div>
       <div className="content">
         <div className="top">
           <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Anos</div>

@@ -62,7 +62,7 @@
   .button {
     display: flex;
     align-items: center;
-    padding: 50px 136px;
+    padding: 50px 135.5px;
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
