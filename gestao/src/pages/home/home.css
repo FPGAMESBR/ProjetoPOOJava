@@ -8,7 +8,7 @@
     height: 100%;
   }
 
-  body {
+  .container {
     background-image: url('../../assets/ground.jpg');
     background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o elemento */
     background-position: center; /* Centraliza a imagem no elemento */
@@ -33,6 +33,15 @@
     cursor: pointer;
     padding: 10px 0;
     transition: background-color 0.3s ease;
+  }
+
+  .menu-item > button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    padding: 10px 10px;
+    color: #fff;
   }
   
   .menu-item:hover {
