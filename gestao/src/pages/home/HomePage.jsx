@@ -29,7 +29,6 @@ const HomePage = () => {
   };
 
   const deleteEvent = () => {
-    // Verifica se há um dia selecionado e se selectedMonth é uma data válida
     if (selectedDay instanceof Date && !isNaN(selectedDay)) {
       console.log("selectedDay:", selectedDay);
       console.log("selectedMonth:", selectedMonth);
@@ -56,6 +55,7 @@ const HomePage = () => {
       setEvents(updatedEvents);
       localStorage.setItem('events', JSON.stringify(updatedEvents));
       closeModal(); // Fechar o modal
+      setSelectedDay(null); // Define selectedDay como null após excluir o evento
     } else {
       console.log("Valor inválido encontrado. selectedDay:", selectedDay, "selectedMonth:", selectedMonth);
     }
@@ -103,10 +103,20 @@ const HomePage = () => {
     setIsModalOpen(true);
     setEventDescription('');
     setExtraInfo('');
+    setSelectedEvent(null); // Limpa o evento selecionado ao abrir o modal de adicionar evento
   };
 
   const openViewModal = () => {
     setIsModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setIsModalOpen(false);
+  };
+  
+  const closeModalAndView = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null); // Limpa o evento selecionado ao fechar o modal
   };
 
   const handleDayClick = (day) => {
@@ -177,7 +187,7 @@ const HomePage = () => {
       </div>
       <Modal
         isOpen={isModalOpen}
-        onRequestClose={closeModal}
+        onRequestClose={closeModalAndView}
         addEvent={addEvent}
         eventDescription={eventDescription}
         setEventDescription={setEventDescription}
@@ -185,10 +195,7 @@ const HomePage = () => {
         extraInfo={extraInfo}
         setExtraInfo={setExtraInfo}
         selectedEvent={selectedEvent} // Passa o evento selecionado, se existir
-        closeViewModal={() => {
-          setSelectedDay(null);
-          setSelectedEvent(null); // Limpa o evento selecionado
-        }} // Função para fechar o modal de visualização
+        closeViewModal={closeModalAndView} // Função para fechar o modal de visualização
       />
     </div>
   );
