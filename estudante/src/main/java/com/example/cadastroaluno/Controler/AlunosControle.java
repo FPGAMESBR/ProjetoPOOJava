@@ -23,23 +23,28 @@ public class AlunosControle {
     }
 
     @GetMapping("/")
-    public List<AlunosModel> todosAlunos(){
-        return alunosServicoRepositorio.todosAlunos();
+    public ResponseEntity<List<AlunosModel>> todosAlunos(){
+        List<AlunosModel> alunos = alunosServicoRepositorio.todosAlunos();
+
+        return ResponseEntity.ok(alunos);
     }
     @GetMapping("/matriculaPendente")
-    public List<AlunosModel> bucarMatrucilaPendenste(){
-        return alunosServicoRepositorio.bucarMatrucilaPendenste();
+    public ResponseEntity<List<AlunosModel>> bucarMatrucilaPendenste(){
+        List<AlunosModel> alunos = alunosServicoRepositorio.bucarMatrucilaPendenste();
+        return ResponseEntity.ok(alunos);
     }
     @GetMapping("/{id}")
-    public AlunosModel umAluno(@PathVariable(value = "id")long id) {
-        return alunosServicoRepositorio.umAluno(id);
-
+    public ResponseEntity<AlunosModel> umAluno(@PathVariable(value = "id")long id) {
+        AlunosModel alunosModel = alunosServicoRepositorio.umAluno(id);
+        return ResponseEntity.ok(alunosModel);
     }
 
     @PostMapping("/")
     @CrossOrigin(origins = "http://localhost:5173/")
-    public AlunosModel inserir(@RequestBody @Valid AlunosDTO alunosDTO){
-        return alunosServicoRepositorio.inserir(alunosDTO);
+    public ResponseEntity<AlunosModel> inserir(@RequestBody @Valid AlunosDTO alunosDTO) {
+        AlunosModel alunosModel = alunosServicoRepositorio.inserir(alunosDTO);
+
+        return ResponseEntity.status(201).body(alunosModel);
     }
     @PutMapping("/")
     public AlunosModel alterar(@RequestBody AlunosModel alunosModel){
