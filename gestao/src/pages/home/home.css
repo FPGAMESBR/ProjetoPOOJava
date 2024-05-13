@@ -19,11 +19,33 @@
     background-color: #333;
     color: #fff;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
   }
   
   .menu-item {
     cursor: pointer;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
   }
+  
+  .menu-item:hover {
+    background-color: #555; /* Cor de fundo ao passar o mouse */
+  }
+  
+  .menu-item.active {
+    background-color: #007bff; /* Cor de fundo do item selecionado */
+  }
+  
+  .menu-item i {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .menu-item span {
+    font-size: 16px;
+  }
+  
   
   .content {
     flex: 1;

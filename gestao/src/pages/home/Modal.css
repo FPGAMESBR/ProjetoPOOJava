@@ -1,59 +1,54 @@
 .modal {
-    display: flex; /* Agora será exibido */
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    position: fixed; /* Para manter o modal fixo na tela */
-    z-index: 1; /* Garante que o modal esteja na frente de outros elementos */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Permite rolar o conteúdo do modal se necessário */
-    background-color: rgba(0, 0, 0, 0.4); /* Cor de fundo semi-transparente */
-  }
-  
-  .modal-content {
-    display: flex;
-    flex-direction: column;
-    background-color: #fefefe; /* Cor de fundo do conteúdo do modal */
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efeito de destaque */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease; /* Adicionando uma transição de opacidade */
+}
 
-  .extra-info-input {
-    margin-top: 10px; /* Adicione um espaço entre a descrição do evento e o campo de informações extras */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 0.5s; /* Adicionando uma animação de entrada */
+}
+
+.extra-info-input {
+  margin-top: 10px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #aaa;
+}
+
+.event-description {
+  margin-top: 10px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
   }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .close:hover {
-    color: #aaa; /* Cor alterada ao passar o mouse */
-  }
-  
-  
-  /* Estilo para os botões do modal */
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Estilo para a descrição do evento */
-  .event-description {
-    margin-top: 10px;
-  }
-  
+}

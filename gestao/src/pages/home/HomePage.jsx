@@ -2,32 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Modal from './Modal.js';
-import './../../assets/fontawesome-pro-6.5.2-web/css/all.min.css';
 
 const HomePage = () => {
-  // Estado para armazenar os eventos
   const [events, setEvents] = useState({});
-
-  // Estado para controlar o mês selecionado no calendário
   const [selectedMonth, setSelectedMonth] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [eventDescription, setEventDescription] = useState('');
-  const [extraInfo, setExtraInfo] = useState(''); // Adicionando estado para extraInfo
+  const [extraInfo, setExtraInfo] = useState('');
 
-  // Função para abrir o modal
-  const openModal = () => setIsModalOpen(true);
-
-  // Função para fechar o modal
-  const closeModal = () => setIsModalOpen(false);
-
-  // Carregar os eventos do localStorage ao inicializar o componente
   useEffect(() => {
     const savedEvents = JSON.parse(localStorage.getItem('events'));
     setEvents(savedEvents || {});
   }, []);
 
-  // Função para mudar o mês selecionado
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const changeMonth = (amount) => {
     setSelectedMonth(prevMonth => {
       const newMonth = new Date(prevMonth);
@@ -37,83 +28,76 @@ const HomePage = () => {
   };
 
   const addEvent = (description, extraInfo) => {
-    console.log("Adding event:", description, extraInfo, selectedDay);
+    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay);
+    const formattedDate = selectedDate.toISOString().split('T')[0];
     const updatedEvents = { ...events };
-    updatedEvents[selectedDay] = { description, extraInfo };
-    console.log("Updated events:", updatedEvents);
+    updatedEvents[formattedDate] = { description, extraInfo };
     setEvents(updatedEvents);
     closeModal();
     localStorage.setItem('events', JSON.stringify(updatedEvents));
-  };  
+  };
 
-
-  const existingEvent = {
-    id: 1, // ID do evento existente
-    description: "Descrição do evento existente",
-    extraInfo: "Informações extras do evento existente"
+  const openAddModal = () => {
+    setIsModalOpen(true);
+    setEventDescription('');
+    setExtraInfo('');
   };
   
-  // Função para abrir o modal ao clicar em um dia
-  const handleDayClick = (day) => {
-    setSelectedDay(day);
-    openModal();
+  const openViewModal = () => {
+    setIsModalOpen(true);
   };
 
-  const editEvent = (eventId, updatedDescription, updatedExtraInfo) => {
-    const updatedEvents = { ...events };
-    if (updatedEvents[eventId]) {
-      updatedEvents[eventId].description = updatedDescription;
-      updatedEvents[eventId].extraInfo = updatedExtraInfo;
+  const handleDayClick = (day) => {
+    const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
+    const formattedDate = selectedDate.toISOString().split('T')[0];
+    setSelectedDay(formattedDate);
+    if (events[formattedDate]) {
+      openViewModal(); // Abre o modal de visualização se houver um evento
+    } else {
+      openAddModal(); // Abre o modal de adicionar se não houver evento
+    }
+  };
+  
+
+  const deleteEvent = () => {
+    // Verifica se há um dia selecionado e se selectedMonth é uma data válida
+    if (selectedDay !== null && selectedMonth instanceof Date && !isNaN(selectedMonth)) {
+      console.log("selectedDay:", selectedDay);
+      console.log("selectedMonth:", selectedMonth);
+  
+      // Cria uma nova data com o ano, mês e dia selecionados
+      const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay);
+      console.log("selectedDate:", selectedDate);
+  
+      // Formata a data para o formato 'YYYY-MM-DD'
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+      console.log("formattedDate:", formattedDate);
+    
+      const updatedEvents = { ...events };
+      delete updatedEvents[formattedDate];
       setEvents(updatedEvents);
       localStorage.setItem('events', JSON.stringify(updatedEvents));
+      closeModal(); // Fechar o modal
+    } else {
+      console.log("Valor inválido encontrado. selectedDay:", selectedDay, "selectedMonth:", selectedMonth);
     }
-  };  
+  };
+  
+  
 
   const navigate = useNavigate();
-  const goToYears = () => {
-    navigate('/years');
-  }
-  const goToTeachers = () => {
-    navigate('/teachers');
-  }
-  const goToDisciplines = () => {
-    navigate('/disc'); 
-  } 
+  const goToYears = () => navigate('/years');
+  const goToTeachers = () => navigate('/teachers');
+  const goToDisciplines = () => navigate('/disc');
 
-  // Função para deletar um evento
-  const deleteEvent = () => {
-    // Excluir o evento existente
-    const updatedEvents = { ...events };
-    delete updatedEvents[selectedDay]; // Remover o evento do objeto usando o selectedDay como id
-    setEvents(updatedEvents); // Atualizar o estado dos eventos
-    localStorage.setItem('events', JSON.stringify(updatedEvents)); // Salvar no localStorage
-    closeModal(); // Fechar o modal
-  };
+  const daysOfMonth = [];
+  const daysInMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0).getDate();
+  const firstDayOfMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 1).getDay();
 
-  // Função para obter o número de dias em um mês específico
-  const getDaysInMonth = (month, year) => {
-    return new Date(year, month + 1, 0).getDate();
-  };
-
-  // Função para obter o primeiro dia da semana para um mês específico
-  const getFirstDayOfMonth = (month, year) => {
-    return new Date(year, month, 1).getDay();
-  };
-
-  // Array de nomes dos dias da semana
+  // Definição dos dias da semana e meses
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-
-  // Array de nomes dos meses
   const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-  // Obter o número de dias e o primeiro dia da semana para o mês selecionado
-  const daysInMonth = getDaysInMonth(selectedMonth.getMonth(), selectedMonth.getFullYear());
-  const firstDayOfMonth = getFirstDayOfMonth(selectedMonth.getMonth(), selectedMonth.getFullYear());
-
-  // Array de dias do mês atual
-  const daysOfMonth = [];
-
-  // Preencher o array com os dias do mês
   for (let i = 1; i <= 42; i++) {
     if (i <= firstDayOfMonth || i > daysInMonth + firstDayOfMonth) {
       daysOfMonth.push('');
@@ -123,54 +107,52 @@ const HomePage = () => {
   }
 
   return (
-      <div className="container">
-        <div className="menu">
-          <div className="menu-item">Início</div>
+    <div className="container">
+      <div className="menu">
+        <div className="menu-item">Início</div>
+      </div>
+      <div className="content">
+        <div className="top">
+          <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Anos</div>
+          <div className="button" onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
+          <div className="button" onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
         </div>
-        <div className="content">
-          <div className="top">
-            <div className="button" data-testid='page-button' onClick={goToYears}><i className="fas fa-calendar-alt"></i> Anos</div>
-            <div className="button" data-testid='page-button' onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
-            <div className="button" data-testid='page-button' onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
-          </div>
-          <div className="calendar">
-            <div className="calendar">
-              <div className="month">{months[selectedMonth.getMonth()]} de {selectedMonth.getFullYear()}</div>
-              <div className="days">
-                {/* Dias da semana */}
-              {weekDays.map((day, index) => (
-                <div key={index} className="day">{day}</div>
-              ))}
-              {/* Dias do mês */}
-              {daysOfMonth.map((day, index) => (
+        <div className="calendar">
+          <div className="month">{months[selectedMonth.getMonth()]} de {selectedMonth.getFullYear()}</div>
+          <div className="days">
+            {weekDays.map((day, index) => (
+              <div key={index} className="day">{day}</div>
+            ))}
+            {daysOfMonth.map((day, index) => {
+              const currentDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
+              const formattedDate = currentDate.toISOString().split('T')[0];
+              return (
                 <div key={index} className={`day ${day ? '' : 'empty'}`} onClick={() => handleDayClick(day)}>
                   {day}
-                  {/* Aqui você pode adicionar um indicador visual se houver um evento neste dia */}
-                  {events[day] && <span className="event-indicator" />}
+                  {events[formattedDate] && <span className="event-indicator" />}
                 </div>
-              ))}
-              </div>
-            </div>
-            <div className="button-container">
-              <button onClick={() => changeMonth(-1)}>Mês Anterior</button>
-              <button onClick={() => changeMonth(1)}>Próximo Mês</button>
-            </div>
+              );
+            })}
           </div>
-          {/* Modal */}
-          <Modal
-            isOpen={isModalOpen}
-            onRequestClose={closeModal}
-            addEvent={addEvent}
-            eventDescription={eventDescription}
-            setEventDescription={setEventDescription}
-            editEvent={editEvent}
-            deleteEvent={deleteEvent}
-            existingEvent={existingEvent}
-            extraInfo={extraInfo}
-            setExtraInfo={setExtraInfo}
-          />
+        </div>
+        <div className="button-container">
+          <button onClick={() => changeMonth(-1)}>Mês Anterior</button>
+          <button onClick={() => changeMonth(1)}>Próximo Mês</button>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        addEvent={addEvent}
+        eventDescription={eventDescription}
+        setEventDescription={setEventDescription}
+        deleteEvent={deleteEvent}
+        extraInfo={extraInfo}
+        setExtraInfo={setExtraInfo}
+        selectedEvent={events[selectedDay]} // Passa o evento selecionado, se existir
+        closeViewModal={() => setSelectedDay(null)} // Função para fechar o modal de visualização
+      />
+    </div>
   );
 };
 
