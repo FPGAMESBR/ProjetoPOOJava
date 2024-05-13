@@ -7,6 +7,12 @@
   html, body, #root {
     height: 100%;
   }
+
+  body {
+    background-image: url('../../assets/ground.jpg');
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o elemento */
+    background-position: center; /* Centraliza a imagem no elemento */
+  }
   
   .container {
     display: flex;
@@ -89,7 +95,7 @@
   
   .day {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(112, 108, 108);  
     text-align: center;
     height: 40px;
   
