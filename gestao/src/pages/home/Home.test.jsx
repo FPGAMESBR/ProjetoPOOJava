@@ -4,6 +4,7 @@ import HomePage from "./homepage";
 import YearPage from "../years/YearPage";
 import TeacherPage from "../teachers/TeacherPage";
 import DiscPage from "../disc/discpage";
+import Register from "../student/register";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
@@ -14,6 +15,7 @@ test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
             <Route path="/years" element={<YearPage />} />
             <Route path="/teachers" element={<TeacherPage />} />
             <Route path="/disc" element={<DiscPage />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
     );

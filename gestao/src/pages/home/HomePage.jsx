@@ -103,6 +103,7 @@ const HomePage = () => {
   const goToYears = () => navigate('/years');
   const goToTeachers = () => navigate('/teachers');
   const goToDisciplines = () => navigate('/disc');
+  const goToRegister = () => navigate('/register');
 
   const daysOfMonth = [];
   const daysInMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0).getDate();
@@ -123,7 +124,7 @@ const HomePage = () => {
     <div className="container">
     <div className="menu">
       <img src={logo} className="logo" alt="Logo da Escola" />
-      <div className="menu-item">Início</div>
+      <div className="menu-item"><button data-testid = 'page-button' onClick={goToRegister}>Register</button></div>
     </div>
       <div className="content">
         <div className="top">
