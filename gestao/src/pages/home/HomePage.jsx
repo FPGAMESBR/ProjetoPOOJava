@@ -127,7 +127,7 @@ const HomePage = () => {
     </div>
       <div className="content">
         <div className="top">
-          <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Anos</div>
+          <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Salas</div>
           <div className="button" onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
           <div className="button" onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
         </div>

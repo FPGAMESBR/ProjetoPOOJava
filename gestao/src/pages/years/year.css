@@ -1,65 +1,70 @@
 .App {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
   }
   
-  .header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    width: 100%;
-    text-align: center;
+.header {
+  padding: 20px;
+  width: 100%;
+  text-align: center;
   }
   
   /* App.css */
 
 .blackboard {
-    background-color: rgb(9, 75, 63);
-    width: 80%;
-    max-width: 1000px;
-    padding: 120px 120px 50px 120px;
-    margin-top: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-    border: 10px solid #8b5c2b; /* Adicionando a borda de madeira */
-  }
-  
-  .blackboard::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border: 10px solid #8b5c2b; /* Adicionando a borda de madeira para a borda externa */
-    border-radius: 20px; /* Arredondando a borda para combinar com o quadro */
+  width: 90%;
+  padding: 20px 20px 50px 20px;
+  margin-top: 20px;
+  position: relative;
   }
    
 .folders {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    margin-top: -50px;
-    margin-left: 50px;
-    flex-direction: column;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px;
+  flex-direction: column;
   }
   
-  .folder {
-    background-color: rgb(255, 222, 128);
-    padding: 23px;
-    border-radius: 15px 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    text-align: center;
-    margin-bottom: 20px;
-    border: none;
-    cursor: pointer;
+.folder {
+  background-color: #004266;
+  color: #fff;
+  padding: 23px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 2.5vh;
   }
-  
-  .folder-icon {
-    margin-bottom: 8px;
-    font-size: 24px; /* Defina o tamanho do ícone conforme necessário */
+
+.folder:hover {
+  background-color: #005D8F;
+  }
+
+button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  }
+ 
+button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -15px;
+  transition: 0.5s;
+  }
+ 
+button:hover span {
+  padding-right: 15px;
+  }
+ 
+button:hover span:after {
+  opacity: 1;
+  right: 0;
   }
