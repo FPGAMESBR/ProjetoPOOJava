@@ -1,9 +1,11 @@
 import './app.css';
-import HomePage from './pages/home/homepage';
+import HomePage from './pages/home/homePage';
 import YearPage from './pages/years/YearPage';
 import TeacherPage from './pages/teachers/TeacherPage';
 import DiscPage from './pages/disciplines/discpage';
 import Register from './pages/student/register';
+import Students from './pages/student/students';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
@@ -15,6 +17,7 @@ const App = () => {
         <Route path="/teachers" element={<TeacherPage />} />
         <Route path="/disc" element={<DiscPage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/students" element={<Students />} />
       </Routes>
     </BrowserRouter>
   );

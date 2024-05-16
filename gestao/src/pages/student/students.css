@@ -1,0 +1,22 @@
+.app {
+    display: flex;
+    justify-content: space-evenly;
+    }
+
+.list-students {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    background-color: aqua;
+    }
+
+.student-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    background-color: blueviolet;
+    }
