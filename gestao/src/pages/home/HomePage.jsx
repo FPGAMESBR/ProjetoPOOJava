@@ -1,7 +1,7 @@
 import '../../assets/fontawesome-pro-6.5.2-web/css/all.min.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './home.css';
+import './Home.css';
 import logo from '../../assets/pngtree-school.png';
 import Modal from './Modal.js';
 

@@ -4,30 +4,40 @@
     padding: 0;
   }
   
+  body {
+    max-width: 100%; /* ou um valor específico em pixels, em vw (viewport width) ou em qualquer outra unidade */
+    margin: 0 auto; /* centraliza o conteúdo */
+    overflow-x: hidden; /* evita a rolagem horizontal */
+}
+
+  
   html, body, #root {
     height: 100%;
   }
-
   .container {
     background-image: url('../../assets/ground.jpg');
-    background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o elemento */
-    background-position: center; /* Centraliza a imagem no elemento */
-  }
-  
-  .container {
+    background-size: cover;
+    background-position: center;
     display: flex;
-    height: 100%; /* Para que a altura do container acompanhe a altura da página */
-  }
-  
-  .menu {
+    height: 100vh; /* Usando 100vh para ocupar a altura total da janela do navegador */
+    overflow-x: hidden;
+}
+
+.menu {
     width: 200px;
-    height: 100%;
     background-color: #333;
     color: #fff;
     padding: 20px;
     display: flex;
     flex-direction: column;
-  }
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Adicionando overflow-y para rolagem vertical caso o conteúdo seja maior que a altura da janela */
+}
+
   
   .menu-item {
     cursor: pointer;
@@ -81,6 +91,8 @@
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
+    box-sizing: border-box;
+    overflow: hidden;
   }
   
   .button img,
