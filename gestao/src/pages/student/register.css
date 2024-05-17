@@ -1,0 +1,106 @@
+/* Estilo geral da página */
+body, html {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Container principal */
+  .contain {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Campo preto no lado esquerdo */
+  .sidebar {
+    width: 110px;
+    background-color: #0c1446; /* Azul escuro */
+    height: 100%;
+  }
+  
+  /* Container do formulário */
+  .form-container {
+    display: flex;
+    flex-grow: 1; /* Para ocupar todo o espaço restante */
+    padding: 20px;
+    flex-wrap: wrap; /* Envolve os formulários em uma linha */
+  }
+  
+  /* Formulários divididos */
+  .form-half {
+    width: calc(50% - 20px); /* Cada metade do formulário ocupa metade do espaço disponível com uma margem entre eles */
+  }
+  
+  /* Títulos */
+  h2 {
+    text-align: center;
+    color: #0c1446; /* Azul escuro */
+    margin-bottom: 20px;
+  }
+  
+  /* Grupos de formulário */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Labels */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Preto */
+  }
+  
+  /* Inputs e Selects */
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f2f2f2; /* Cinza claro */
+    font-size: 14px;
+    color: #333; /* Preto */
+  }
+  
+  /* Botão de envio */
+  button {
+    width: 100%;
+    padding: 15px;
+    background-color: #0c1446; /* Azul escuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #1b2a7e; /* Azul mais claro */
+  }
+  
+  /* Ajustes para dispositivos móveis */
+  @media (max-width: 768px) {
+    .contain {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: 110px;
+    }
+  
+    .form-container {
+      width: 100%;
+      flex-direction: column;
+    }
+  
+    .form-half {
+      width: 100%;
+    }
+  }  
