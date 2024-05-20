@@ -6,13 +6,18 @@ function Students() {
         <div className='app'>
             <div className='list-students'>
                 <h1>Lista de Alunos</h1>
-                <ul>
-                    <li>Aluno 1</li>
-                    <li>Aluno 2</li>
-                    <li>Aluno 3</li>
-                    <li>Aluno 4</li>
-                    <li>Aluno 5</li>
-                </ul>
+                <div className='container-students'>
+                    <div className='table-header'>
+                        <p>Alunos</p>
+                        <p>Nascimento</p>
+                        <p>Média</p>
+                    </div>
+                    <button className='student'>
+                        <p>Mayron Wilke Ferreira Freire</p>
+                        <p>28/03/2005</p>
+                        <p>8.9</p>
+                    </button>
+                </div>
             </div>
         
             <div className='student-info'>
