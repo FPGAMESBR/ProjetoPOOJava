@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import HomePage from "./homepage";
+import HomePage from "./HomePage";
 import YearPage from "../years/YearPage";
 import TeacherPage from "../teachers/TeacherPage";
 import DiscPage from "../disc/discpage";
 import Register from "../student/register";
+import Students from "../student/students";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
@@ -13,6 +14,7 @@ test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/years" element={<YearPage />} />
+            <Route path="/students" element={<Students />} />
             <Route path="/teachers" element={<TeacherPage />} />
             <Route path="/disc" element={<DiscPage />} />
             <Route path="/register" element={<Register />} />
@@ -45,4 +47,9 @@ test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
     const homeButton = screen.getByText(/Início/i);
     await userEvent.click(homeButton);
     expect(window.location.pathname).toEqual('/');
+
+    const studentsButton = screen.getByText(/Students/i);
+    await userEvent.click(studentsButton);
+    await userEvent.click(studentsButton);
+    expect(window.location.pathname).toEqual('/students');
 });

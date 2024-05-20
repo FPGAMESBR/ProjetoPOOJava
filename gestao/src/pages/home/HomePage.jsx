@@ -1,7 +1,7 @@
 import '../../assets/fontawesome-pro-6.5.2-web/css/all.min.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './home.css';
+import './Home.css';
 import logo from '../../assets/pngtree-school.png';
 import Modal from './Modal.js';
 
@@ -101,6 +101,7 @@ const HomePage = () => {
 
   const navigate = useNavigate();
   const goToYears = () => navigate('/years');
+  const goToStudents = () => navigate('/students');
   const goToTeachers = () => navigate('/teachers');
   const goToDisciplines = () => navigate('/disc');
   const goToRegister = () => navigate('/register');
@@ -129,6 +130,7 @@ const HomePage = () => {
       <div className="content">
         <div className="top">
           <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Salas</div>
+          <div className="button" onClick={goToStudents}><i className="fas fa-calendar-alt"></i> Alunos</div>
           <div className="button" onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
           <div className="button" onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
         </div>
