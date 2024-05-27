@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaFolderOpen } from 'react-icons/fa';
 import './Year.css';
 
 function YearPage() {
