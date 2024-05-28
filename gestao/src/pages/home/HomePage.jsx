@@ -1,6 +1,7 @@
 import '../../assets/fontawesome-pro-6.5.2-web/css/all.min.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './home.css';
 import logo from '../../assets/pngtree-school.png';
 import Modal from './Modal.js';
@@ -9,19 +10,27 @@ const HomePage = () => {
   const [events, setEvents] = useState({});
   const [selectedMonth, setSelectedMonth] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
-  const [selectedEvent, setSelectedEvent] = useState(null); // Novo estado para o evento selecionado
+  const [selectedEvent, setSelectedEvent] = useState(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [eventDescription, setEventDescription] = useState('');
   const [extraInfo, setExtraInfo] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const savedEvents = JSON.parse(localStorage.getItem('events'));
-    setEvents(savedEvents || {});
+    axios.get('http://localhost:5000/events')
+      .then(response => {
+        const eventsFromDb = {};
+        response.data.forEach(event => {
+          eventsFromDb[event.date] = { description: event.description, extraInfo: event.extraInfo };
+        });
+        setEvents(eventsFromDb);
+      })
+      .catch(error => console.error('Erro ao buscar eventos:', error));
   }, []);
 
   const closeModalAndView = () => {
     setIsModalOpen(false);
-    setSelectedEvent(null); // Limpa o evento selecionado ao fechar o modal
+    setSelectedEvent(null);
   };
 
   const changeMonth = (amount) => {
@@ -34,22 +43,19 @@ const HomePage = () => {
 
   const deleteEvent = () => {
     if (selectedDay instanceof Date && !isNaN(selectedDay)) {
-      const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), selectedDay.getDate());
-  
-      // Exclui o evento para o dia selecionado, se existir
-      const updatedEvents = { ...events };
-      delete updatedEvents[selectedDate.toISOString().split('T')[0]];
-  
-      // Atualiza o estado dos eventos e salva no localStorage
-      setEvents(updatedEvents);
-      localStorage.setItem('events', JSON.stringify(updatedEvents));
-      closeModalAndView(); // Fechar o modal
-      setSelectedDay(null); // Define selectedDay como null após excluir o evento
-    } else {
-      console.log("Valor inválido encontrado. selectedDay:", selectedDay, "selectedMonth:", selectedMonth);
+      const selectedDate = selectedDay.toISOString().split('T')[0];
+      axios.delete(`http://localhost:5000/events/${selectedDate}`)
+        .then(() => {
+          const updatedEvents = { ...events };
+          delete updatedEvents[selectedDate];
+          setEvents(updatedEvents);
+          closeModalAndView();
+          setSelectedDay(null);
+        })
+        .catch(error => console.error('Erro ao deletar evento:', error));
     }
   };
-  
+
   const addEvent = (description, extraInfo) => {
     if (!(selectedDay instanceof Date) || isNaN(selectedDay)) {
       console.error("selectedDay é inválido:", selectedDay);
@@ -68,18 +74,22 @@ const HomePage = () => {
       return;
     }
   
-    const updatedEvents = { ...events };
-    updatedEvents[selectedDate.toISOString().split('T')[0]] = { description, extraInfo };
-    setEvents(updatedEvents);
-    closeModalAndView();
-    localStorage.setItem('events', JSON.stringify(updatedEvents));
-  };  
+    const formattedDate = selectedDate.toISOString().split('T')[0];
+    axios.post('http://localhost:5000/events', { date: formattedDate, description, extraInfo })
+      .then(() => {
+        const updatedEvents = { ...events };
+        updatedEvents[formattedDate] = { description, extraInfo };
+        setEvents(updatedEvents);
+        closeModalAndView();
+      })
+      .catch(error => console.error('Erro ao adicionar evento:', error));
+  };
 
   const openAddModal = () => {
     setIsModalOpen(true);
     setEventDescription('');
     setExtraInfo('');
-    setSelectedEvent(null); // Limpa o evento selecionado ao abrir o modal de adicionar evento
+    setSelectedEvent(null); 
   };
 
   const openViewModal = () => {
@@ -89,19 +99,19 @@ const HomePage = () => {
   const handleDayClick = (day) => {
     if (day > 0) {
       const selectedDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
-      setSelectedDay(selectedDate); // Definir selectedDay como uma instância de Date
-      if (events[selectedDate.toISOString().split('T')[0]]) {
-        setSelectedEvent(events[selectedDate.toISOString().split('T')[0]]); // Define o evento selecionado
-        openViewModal(); // Abre o modal de visualização se houver um evento
+      setSelectedDay(selectedDate);
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+      if (events[formattedDate]) {
+        setSelectedEvent(events[formattedDate]);
+        openViewModal();
       } else {
-        openAddModal(); // Abre o modal de adicionar se não houver evento
+        openAddModal();
       }
     }
   };
 
   const navigate = useNavigate();
   const goToYears = () => navigate('/years');
-  const goToStudents = () => navigate('/students');
   const goToTeachers = () => navigate('/teachers');
   const goToDisciplines = () => navigate('/disc');
   const goToRegister = () => navigate('/register');
@@ -121,14 +131,21 @@ const HomePage = () => {
     }
   }
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <div className="container">
-    <div className="menu">
-      <img src={logo} className="logo" alt="Logo da Escola" />
-      <div className="menu-item"><button data-testid = 'page-button' onClick={goToRegister}>Register</button></div>
-    </div>
+      <div className="menu">
+        <img src={logo} className="logo" alt="Logo da Escola" />
+        <div className="menu-item"><button data-testid='page-button' onClick={goToRegister}><i class="fa-solid fa-plus"></i></button></div>
+        <button className="hamburger" onClick={toggleMenu}>
+          <i className="fas fa-bars"></i>
+      </button>
+      </div>
       <div className="content">
-        <div className="top">
+      <div className={`top ${menuOpen ? 'hide' : ''}`}>
           <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Salas</div>
           <div className="button" onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
           <div className="button" onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
@@ -154,6 +171,7 @@ const HomePage = () => {
         <div className="button-container">
           <button onClick={() => changeMonth(-1)}>Mês Anterior</button>
           <button onClick={() => changeMonth(1)}>Próximo Mês</button>
+          <img src={logo} className="logo2" alt="Logo da Escola" />
         </div>
       </div>
       <Modal
@@ -165,8 +183,8 @@ const HomePage = () => {
         deleteEvent={deleteEvent}
         extraInfo={extraInfo}
         setExtraInfo={setExtraInfo}
-        selectedEvent={selectedEvent} // Passa o evento selecionado, se existir
-        closeViewModal={closeModalAndView} // Função para fechar o modal de visualização
+        selectedEvent={selectedEvent}
+        closeViewModal={closeModalAndView}
       />
     </div>
   );

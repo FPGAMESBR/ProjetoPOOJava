@@ -70,6 +70,10 @@
   .menu-item span {
     font-size: 16px;
   }
+
+  .hamburger {
+    display: none; /* Esconde o ícone do menu por padrão */
+  }
   
   
   .content {
@@ -156,6 +160,10 @@
   .day {
     position: relative;
   }
+
+  .logo2 {
+    display: none;
+  }
   
   .event-indicator {
     position: absolute;
@@ -168,4 +176,106 @@
   }
   
   
-  
+  /* Estilos para dispositivos móveis */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+
+    .menu {
+      width: 100%;
+      height: 10%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+    }
+    
+    .menu > .logo {
+      display: none;
+    }
+
+    .logo2 {
+      display: block;
+      width: 70%;
+      margin-left: 15%;
+    }
+
+    .menu-item {
+      display: 0; /* Esconde os itens do menu por padrão */
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      display: block;
+      padding: 0;
+      height: 0;
+      margin-top: -30px;
+      margin-left: 240px;
+    }
+
+    .menu.open .menu-item {
+      display: block;
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .content {
+      display: block; /* Exibe o conteúdo por padrão */
+      padding: 10px;
+    }
+
+    .top {
+      display: none;
+    }
+
+    .top.hide {
+      display: contents; /* Esconde o conteúdo quando o menu está aberto */
+    }
+
+    .top {
+      flex-direction: column;
+    }
+
+    .button {
+      padding: 20px;
+      margin-bottom: 10px;
+      flex: 1;
+      text-align: center;
+    }
+
+
+    .calendar {
+      margin-top: 10px;
+    }
+
+    .month {
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .days {
+      grid-template-columns: repeat(7, 1fr);
+      grid-gap: 2px;
+    }
+
+    .day {
+      padding: 5px;
+      height: 30px;
+      font-size: 12px;
+    }
+
+    .button-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .button-container button {
+      margin-bottom: 10px;
+    }
+  }
