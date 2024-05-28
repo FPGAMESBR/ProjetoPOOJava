@@ -27,15 +27,6 @@
     justify-items: center;
     }
 
-.student-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    background-color: blueviolet;
-    }
-
 .container-students {
     display: grid;
     grid-template-columns: 600px;
@@ -48,12 +39,11 @@
     display: grid;
     grid-template-columns: 3fr 1.5fr 1fr;
     padding: 20px;
-    align-items: flex-start;
-    border: none;
     border-bottom: #000 2px solid;  
     background-color: #fff;
     cursor: pointer;
-    justify-items: center;
+    color: #000;
+    border-radius: 0%;
     }
 
 .student:hover {
@@ -70,4 +60,17 @@
 
 /*FIM Lista de estudantes*/
 
+/*Detalhes do estudante*/
+
+.student-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    background-color: blueviolet;
+    }
+
+/*FIM Detalhes do estudante*/
 

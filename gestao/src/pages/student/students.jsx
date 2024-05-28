@@ -22,6 +22,11 @@ function Students() {
         
             <div className='student-info'>
                 <h1>Nome Completo do Aluno</h1>
+
+                <div className='info'>
+                    <h3>Nome Completo</h3>
+                    <p></p>
+                </div>
             </div>
         </div>
     );
