@@ -12,7 +12,6 @@
     align-items: center;
     width: 100%;
     max-width: 600px;
-    background-color: aqua;
     }
 
 .table-header {
@@ -20,7 +19,7 @@
     grid-template-columns: 3fr 1.5fr 1fr;
     padding: 20px;
     border: none;
-    background-color: #C1121F;
+    background-color: #004266;
     font-size: 16px;
     border-bottom: #000 2px solid;
     color: #fff;
@@ -68,9 +67,57 @@
     align-items: center;
     width: 100%;
     max-width: 600px;
-    height: 400px;
-    background-color: blueviolet;
+    height: auto;
     }
+
+.info-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;    
+}
+
+.info {
+    display: grid;
+    grid-template-columns: 300px 300px;;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.info div {
+    border-bottom: #000 1px solid;
+    margin-top: 5px;
+}
+
+.info h4 {
+    margin-bottom: 5px;
+}
+
+.info p {
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 10px;
+}
+
+.student-grades {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px ;
+    max-width: 600px;
+    border: #000 1px solid;
+}
+
+.student-grades div {
+    border: #000 1px solid;
+    padding: 5px;
+}
+
+.student-grades div p {
+    margin-top: 5px;
+}
+
 
 /*FIM Detalhes do estudante*/
 
