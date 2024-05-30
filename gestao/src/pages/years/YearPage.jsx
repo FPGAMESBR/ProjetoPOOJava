@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaFolderOpen } from 'react-icons/fa';
 import './Year.css';
 
 function YearPage() {
@@ -11,7 +10,7 @@ function YearPage() {
       </header>
       <div className="blackboard">
         <div className="folders">
-          {['Maternal','Pré-escola I','Pré-escola II', '1° ano', '2° ano', '3° ano', '4° ano', '5° ano', '6° ano', '7° ano', '8° ano', '9° ano',  ].map((year) => (
+          {['Maternal','Jardim I','Jardim II', '1° ano', '2° ano', '3° ano', '4° ano', '5° ano', '6° ano', '7° ano', '8° ano', '9° ano',  ].map((year) => (
             <button
               className="folder"
               key={year}
