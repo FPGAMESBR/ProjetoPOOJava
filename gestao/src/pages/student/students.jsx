@@ -1,5 +1,95 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './students.css';
+
+
+//Lista de Alunos
+function StudentButton({ name, bithdate, average }) {
+
+    return (
+        <button className='student'>
+            <p>{name}</p>
+            <p>{bithdate}</p>
+            <p>{average}</p>
+        </button>
+    );
+}
+
+const students = [
+    {
+        name: 'Mayron Wilke Ferreira Freire',
+        bithdate: '28/03/2005',
+        average: '8.9'
+    },
+];
+
+//Informações detalhadas
+function StudentInfo() {
+    const [student, setStudent] = useState({});
+
+    useEffect(() => {
+        axios.get('https://api.example.com/student') // Substitua com a URL da sua API
+            .then(response => {
+                setStudent(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
+
+    return (
+        <div className='info'>
+            <div>
+            <h4>Nome Completo</h4>
+            <p>{student.name}</p>
+            </div>
+            <div>
+            <h4>Data de Nascimento</h4>
+            <p>{student.bithdate}</p>
+            </div>
+            <div>
+            <h4>Gênero</h4>
+            <p>{student.gender}</p>
+            </div>
+            <div>
+            <h4>Endereço</h4>
+            <p>{student.address}</p>
+            </div>
+            <div>
+            <h4>Email</h4>
+            <p>{student.email}</p>
+            </div>
+            <div>
+            <h4>Email Responsavel</h4>
+            <p>{student.email_responsible}</p>
+            </div>
+            <div>
+            <h4>CPF</h4>
+            <p>{student.cpf}</p>
+            </div>
+            <div>
+            <h4>RG</h4>
+            <p>{student.rg}</p>
+            </div>
+            <div>
+            <h4>Telefone</h4>
+            <p>{student.phone}</p>
+            </div>
+            <div>
+            <h4>Telefone Responsavel</h4>
+            <p>{student.phone_responsible}</p>
+            </div>
+            <div>
+            <h4>Série/Ano</h4>
+            <p>{student.year}</p>
+            </div>
+            <div>
+            <h4>Turno</h4>
+            <p>{student.shift}</p>
+            </div>
+        </div>
+    );
+}
 
 function Students() { 
     return (
@@ -12,11 +102,9 @@ function Students() {
                         <p>Nascimento</p>
                         <p>Média</p>
                     </div>
-                    <button className='student'>
-                        <p>Mayron Wilke Ferreira Freire</p>
-                        <p>28/03/2005</p>
-                        <p>8.9</p>
-                    </button>
+                    {students.map((student, index) => (
+                        <StudentButton key={index} name={student.name} bithdate={student.bithdate} average={student.average} />
+                    ))}
                 </div>
             </div>
         
@@ -28,51 +116,8 @@ function Students() {
                     <h4>Nome Completo</h4>
                     <p>Mayron Wilke Ferreira Freire</p>
                     </div>
-                    <div>
-                    <h4>Data de Nascimento</h4>
-                    <p>28/03/2005</p>
-                    </div>
-                    <div>
-                    <h4>Gênero</h4>
-                    <p>Masculino</p>
-                    </div>
-                    <div>
-                    <h4>Endereço</h4>
-                    <p>Rua: Jóse raimundo Alves N°: 1</p>
-                    </div>
-                    <div>
-                    <h4>Email</h4>
-                    <p>mayronwilke28@gmail.com</p>
-                    </div>
-                    <div>
-                    <h4>Email Responsavel</h4>
-                    <p>monicamayron123@gmail.com</p>
-                    </div>
-                    <div>
-                    <h4>CPF</h4>
-                    <p>123.456.789-10</p>
-                    </div>
-                    <div>
-                    <h4>RG</h4>
-                    <p>123456789</p>
-                    </div>
-                    <div>
-                    <h4>Telefone</h4>
-                    <p>(99) 99999-9999</p>
-                    </div>
-                    <div>
-                    <h4>Telefone Responsavel</h4>
-                    <p>(99) 99999-9999</p>
-                    </div>
-                    <div>
-                    <h4>Série/Ano</h4>
-                    <p>3° Semestre</p>
-                    </div>
-                    <div>
-                    <h4>Turno</h4>
-                    <p>Manhã</p>
-                    </div>
                 </div>
+                
                     <h2 className='grades-title'>Notas</h2>
                     <div className='student-grades'>
                         <div className='grade'>
