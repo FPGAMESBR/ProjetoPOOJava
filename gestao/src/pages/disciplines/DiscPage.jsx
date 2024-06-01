@@ -1,7 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./disc.css";
 
-function discpage() {
+function DiscPage() {
+  const disciplines = [
+    { name: "Português", path: "/.../portugues" },
+    { name: "Redação", path: "/.../redacao" },
+    { name: "Inglês", path: "/.../ingles" },
+    { name: "Matemática", path: "/.../matematica" },
+    { name: "Geometria", path: "/.../geometria" },
+    { name: "Ciências", path: "/.../ciencias" },
+    { name: "História", path: "/.../historia" },
+    { name: "Geografia", path: "/.../geografia" },
+    { name: "Filosofia", path: "/.../filosofia" },
+    { name: "Arte", path: "/.../arte" },
+    { name: "Educação Física", path: "/.../educacao-fisica" },
+    { name: "Direito e Cidadania", path: "/.../direito-e-cidadania" },
+    { name: "Religião", path: "/.../religiao" },
+  ];
+
   return (
     <div className="Container">
       <header className="Header">
@@ -9,26 +26,19 @@ function discpage() {
       </header>
       <div className="Disciplines-Container">
         <div className="Disciplines">
-            <ul className="Itens">
-            <a className="fas fa-book-open" href=""><li>Português</li></a>
-            <a className="fas fa-book-open" href=""><li>Redação</li></a>
-            <a className="fas fa-book-open" href=""><li>Inglês</li></a>
-            <a className="fas fa-book-open" href=""><li>Matemática</li></a>
-            <a className="fas fa-book-open" href=""><li>Geometria</li></a>
-            <a className="fas fa-book-open" href=""><li>Ciências</li></a>
-            <a className="fas fa-book-open" href=""><li>História</li></a>
-            <a className="fas fa-book-open" href=""><li>Geografia</li></a>
-            <a className="fas fa-book-open" href=""><li>Filosofia</li></a>
-            <a className="fas fa-book-open" href=""><li>Arte</li></a>
-            <a className="fas fa-book-open" href=""><li>Educação Física</li></a>
-            <a className="fas fa-book-open" href=""><li>Direito e Cidadania</li></a>
-            <a className="fas fa-book-open" href=""><li>Religião</li></a>
-            </ul>
+          <ul className="Itens">
+            {disciplines.map((discipline) => (
+              <li key={discipline.path}>
+                <Link className="disc-link" to={discipline.path}>
+                  {discipline.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
   );
 }
 
-export default discpage;
-
+export default DiscPage;
