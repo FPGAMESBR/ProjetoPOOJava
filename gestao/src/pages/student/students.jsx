@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import './students.css';
 
-
-//Lista de Alunos
-function StudentButton({ name, bithdate, average }) {
-
+function StudentButton({ name, bithdate, average, onClick }) {
     return (
-        <button className='student'>
+        <button className='student' onClick={onClick}>
             <p>{name}</p>
             <p>{bithdate}</p>
             <p>{average}</p>
@@ -15,83 +13,88 @@ function StudentButton({ name, bithdate, average }) {
     );
 }
 
-const students = [
-    {
-        name: 'Mayron Wilke Ferreira Freire',
-        bithdate: '28/03/2005',
-        average: '8.9'
-    },
-];
-
-//Informações detalhadas
-function StudentInfo() {
-    const [student, setStudent] = useState({});
-
-    useEffect(() => {
-        axios.get('https://api.example.com/student') // Substitua com a URL da sua API
-            .then(response => {
-                setStudent(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }, []);
+function StudentInfo({ student }) {
+    if (!student) return null;
 
     return (
         <div className='info'>
             <div>
-            <h4>Nome Completo</h4>
-            <p>{student.name}</p>
+                <h4>Nome Completo</h4>
+                <p>{student.name}</p>
             </div>
             <div>
-            <h4>Data de Nascimento</h4>
-            <p>{student.bithdate}</p>
+                <h4>Data de Nascimento</h4>
+                <p>{student.bithdate}</p>
             </div>
             <div>
-            <h4>Gênero</h4>
-            <p>{student.gender}</p>
+                <h4>Gênero</h4>
+                <p>{student.gender}</p>
             </div>
             <div>
-            <h4>Endereço</h4>
-            <p>{student.address}</p>
+                <h4>Endereço</h4>
+                <p>{student.address}</p>
             </div>
             <div>
-            <h4>Email</h4>
-            <p>{student.email}</p>
+                <h4>Email</h4>
+                <p>{student.email}</p>
             </div>
             <div>
-            <h4>Email Responsavel</h4>
-            <p>{student.email_responsible}</p>
+                <h4>Email Responsavel</h4>
+                <p>{student.email_responsible}</p>
             </div>
             <div>
-            <h4>CPF</h4>
-            <p>{student.cpf}</p>
+                <h4>CPF</h4>
+                <p>{student.cpf}</p>
             </div>
             <div>
-            <h4>RG</h4>
-            <p>{student.rg}</p>
+                <h4>RG</h4>
+                <p>{student.rg}</p>
             </div>
             <div>
-            <h4>Telefone</h4>
-            <p>{student.phone}</p>
+                <h4>Telefone</h4>
+                <p>{student.phone}</p>
             </div>
             <div>
-            <h4>Telefone Responsavel</h4>
-            <p>{student.phone_responsible}</p>
+                <h4>Telefone Responsavel</h4>
+                <p>{student.phone_responsible}</p>
             </div>
             <div>
-            <h4>Série/Ano</h4>
-            <p>{student.year}</p>
+                <h4>Série/Ano</h4>
+                <p>{student.year}</p>
             </div>
             <div>
-            <h4>Turno</h4>
-            <p>{student.shift}</p>
+                <h4>Turno</h4>
+                <p>{student.shift}</p>
+            </div>
+            <h2 className='grades-title'>Notas</h2>
+            <div className='student-grades'>
+                {student.grades.map((grade, index) => (
+                    <div className='grade' key={index}>
+                        <h4>{grade.subject}</h4>
+                        <p>{grade.score}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );
 }
 
-function Students() { 
+function Students() {
+    const { serieAluno } = useParams();
+    const [students, setStudents] = useState([]);
+    const [selectedStudent, setSelectedStudent] = useState(null);
+
+    useEffect(() => {
+        // Fetch students based on serieAluno
+        axios.get(`http://localhost:8080/api/alunos/${serieAluno}`)
+            .then(response => {
+                setStudents(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, [serieAluno]);
+
     return (
         <div className='app'>
             <div className='list-students'>
@@ -103,76 +106,22 @@ function Students() {
                         <p>Média</p>
                     </div>
                     {students.map((student, index) => (
-                        <StudentButton key={index} name={student.name} bithdate={student.bithdate} average={student.average} />
+                        <StudentButton
+                            key={index}
+                            name={student.name}
+                            bithdate={student.bithdate}
+                            average={student.average}
+                            onClick={() => setSelectedStudent(student)}
+                        />
                     ))}
                 </div>
             </div>
-        
             <div className='student-info'>
-                <h1 className='info-detail'>Informações detalhada</h1>
-
-                <div className='info'>
-                    <div>
-                    <h4>Nome Completo</h4>
-                    <p>Mayron Wilke Ferreira Freire</p>
-                    </div>
-                </div>
-                
-                    <h2 className='grades-title'>Notas</h2>
-                    <div className='student-grades'>
-                        <div className='grade'>
-                            <h4>Matemática</h4>
-                            <p>8.5</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Português</h4>
-                            <p>9.0</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Geografia</h4>
-                            <p>7.5</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>História</h4>
-                            <p>8.0</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Ciências</h4>
-                            <p>9.0</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Artes</h4>
-                            <p>10.0</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Edu Física</h4>
-                            <p>9.5</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Inglês</h4>
-                            <p>8.0</p>
-                        </div>
-                        <div className='grade'>
-                            <h4>Religião</h4>
-                            <p>10.0</p>
-                        </div>
-                        <div>
-                            <h4>Redação</h4>
-                            <p>8.9</p>
-                        </div>
-                        <div>
-                            <h4>Filosofia</h4>
-                            <p>8.9</p>
-                        </div>
-                        <div>
-                            <h4>Cidadania</h4>
-                            <p>8.9</p>
-                        </div>
-                    </div>
+                <h1 className='info-detail'>Informações detalhadas</h1>
+                <StudentInfo student={selectedStudent} />
             </div>
         </div>
     );
 }
-
 
 export default Students;

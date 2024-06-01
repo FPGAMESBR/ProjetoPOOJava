@@ -18,6 +18,7 @@ const App = () => {
         <Route path="/disc" element={<DiscPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/students" element={<Students />} />
+        <Route path="/students/:serieAluno" element={<Students />} />
       </Routes>
     </BrowserRouter>
   );
