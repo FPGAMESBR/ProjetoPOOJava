@@ -52,7 +52,7 @@ html, body, #root {
 }
 
 .menu-item.active {
-  background-color: #007bff;
+  background-color: #004080;
 }
 
 .menu-item i {
@@ -83,18 +83,21 @@ html, body, #root {
 
 .button {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 50px 135.5px;
-  background-color: #007bff;
+  padding: 50px 120px;
+  background-color: #004266;
   color: #fff;
   cursor: pointer;
   box-sizing: border-box;
   overflow: hidden;
   transition: background-color 0.3s;
+  width: 340px;
+  border-radius: 15px;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #005D8F;
 }
 
 .button:active {
@@ -103,7 +106,7 @@ html, body, #root {
 
 .button img,
 .button i {
-  margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 .calendar {
@@ -164,7 +167,7 @@ html, body, #root {
 
 .button-container button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #004266;
   color: white;
   border: none;
   border-radius: 5px;
@@ -173,7 +176,7 @@ html, body, #root {
 }
 
 .button-container button:hover {
-  background-color: #0056b3;
+  background-color: #005D8F;
 }
 
 .button-container button:active {
