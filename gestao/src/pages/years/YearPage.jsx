@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Year.css';
+import './year.css';
 
 function YearPage() {
   const years = [
@@ -28,7 +28,7 @@ function YearPage() {
           {years.map(({ name, series }) => (
             <Link to={`/students/${series}`} key={series} className="folder">
               <div className="folder-content">
-                <span>{name}</span>
+                 <span>{name}</span>
               </div>
             </Link>
           ))}

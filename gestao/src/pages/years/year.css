@@ -59,39 +59,12 @@ h1 {
   font-size: 2.5vh;
   transition: background-color 0.3s, transform 0.3s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .folder:hover {
   background-color: #005D8F;
   transform: scale(1.05);
-}
-
-.folder-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.folder-content span {
-  transition: padding-right 0.5s, transform 0.5s;
-}
-
-.folder-content span:after {
-  content: '»';
-  position: absolute;
-  opacity: 0;
-  right: -15px;
-  transition: opacity 0.5s, right 0.5s;
-}
-
-.folder:hover .folder-content span {
-  padding-right: 15px;
-}
-
-.folder:hover .folder-content span:after {
-  opacity: 1;
-  right: 0;
 }
 
 /* Media Queries */
