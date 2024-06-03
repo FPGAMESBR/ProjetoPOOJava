@@ -17,28 +17,41 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
+@Getter@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "TB_alunos")
 public class AlunosModel  implements Serializable {
     @Id
-    private long Matricula;
-    private String Nome;
-    private String Email;
-    private String NomeResponsavel;
+    private Long cpf;
+
+    private String rgAluno;
+    private String nis;
+    private String numeroCertidao;
+    private String serieAno;
+    private String nomeAluno;
+    private String alunoStatus;
+    private String naturnalidadeEstado;
+    private String nacionalidade;
+    private String tipoSanguinio;
+    private String genero;
+
+    private String nomePai;
+    private String nomeMae;
+    private String emailResposavel;
+    private String cpfPai;
+    private String cpfMae;
+    private String rgPai;
+    private String rgMae;
+    private String endereco;
+
+
+
+
     @Temporal(TemporalType.DATE)
     private Date dataCadastro = new Date();
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    private long CPF;
-    private BigDecimal Telefone1;
-    private BigDecimal Telefone2;
-    private long serieAluno;
-
-    private String AlunoStatus;
-    private String Sexo;
 
     @OneToMany(mappedBy = "alunosModel", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

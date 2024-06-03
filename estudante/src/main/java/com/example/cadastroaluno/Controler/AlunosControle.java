@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,5 +67,16 @@ public class AlunosControle {
     public ResponseEntity<Void> excluir(@PathVariable(value = "id") Long id){
         alunosServicoRepositorio.excluir(id);
        return ResponseEntity.ok().build();
+    }
+    private static final List<String> SERIES_VALIDAS = Arrays.asList(
+            "Maternal", "Pré-escola I", "Pré-escola II", "1° ano", "2° ano", "3° ano", "4° ano", "5° ano",
+            "6° ano", "7° ano", "8° ano", "9° ano"
+    );
+    @GetMapping("/alunos")
+    public List<AlunosModel> buscarAlunosPorSerie(@RequestParam String serieAno) {
+        if (!SERIES_VALIDAS.contains(serieAno)) {
+            throw new IllegalArgumentException("Série inválida: " + serieAno);
+        }
+        return alunosServicoRepositorio.buscarPorSerie(serieAno);
     }
 }

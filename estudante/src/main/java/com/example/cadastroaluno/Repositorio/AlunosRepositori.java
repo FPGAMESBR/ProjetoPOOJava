@@ -11,8 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface AlunosRepositori extends JpaRepository<AlunosModel, Long> {
-    @Query("select s from AlunosModel s where s.Telefone2 is null or s.Email is null")
+    @Query("select s from AlunosModel s where s.emailResposavel is null or s.tipoSanguinio is null")
     List<AlunosModel> buscarMatriculaPendente();
+    List<AlunosModel> findBySerieAno(String serieAno);
 
 }
 

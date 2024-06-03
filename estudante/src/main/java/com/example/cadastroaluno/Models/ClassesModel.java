@@ -18,22 +18,30 @@ public class ClassesModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private double Nota1;
-    private double Nota2;
-    private double Nota3;
-    private double Nota4;
-    private double Nota5;
-    private double Nota6;
+    private double Portugues;
+    private double Redação;
+    private double Ingles;
+    private double Matematica;
+    private double Geometria;
+    private double Ciencias;
+    private double Historia;
+    private double Geografia;
+    private double Filosofia;
+    private double Arte;
+    private double EFisica;
+    private double DireitoCidadania;
+    private double Religiao;
     private double media;
 
     public double getMedia() {
-        double rawMedia = (Nota1 + Nota2 + Nota3 + Nota4 + Nota5 + Nota6) / 6;
+        double rawMedia = (Portugues + Redação + Ingles + Matematica + Geometria + Ciencias + Historia + Geografia + Filosofia
+                + Arte + EFisica + DireitoCidadania + Religiao ) / 14;
         return BigDecimal.valueOf(rawMedia)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
     }
     @ManyToOne
-    @JoinColumn(name = "Matricula", referencedColumnName = "Matricula")
+    @JoinColumn(name = "CPF", referencedColumnName = "CPF")
     @JsonBackReference
     private AlunosModel alunosModel;
 }

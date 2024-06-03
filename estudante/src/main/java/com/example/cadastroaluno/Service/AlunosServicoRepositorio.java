@@ -25,6 +25,10 @@ public class AlunosServicoRepositorio {
     }
     public List<AlunosModel> bucarMatrucilaPendenste(){
         return alunosRepositori.buscarMatriculaPendente();
+
+    }
+    public List<AlunosModel> buscarPorSerie(String serieAno) {
+        return alunosRepositori.findBySerieAno(serieAno);
     }
 
     public  AlunosModel umAluno(Long id){
@@ -36,7 +40,7 @@ public class AlunosServicoRepositorio {
     public AlunosModel inserir(AlunosDTO alunosDTO){
         var alunosModel = new AlunosModel();
         BeanUtils.copyProperties(alunosDTO, alunosModel);
-            if (alunosModel.getEmail() == null || alunosModel.getTelefone2() == null) {
+            if (alunosModel.getEmailResposavel() == null || alunosModel.getTipoSanguinio() == null) {
                 alunosModel.setAlunoStatus("Pendente");
             } else {
                 alunosModel.setAlunoStatus("Concluido");
@@ -48,7 +52,7 @@ public class AlunosServicoRepositorio {
 
     @Transactional(rollbackOn = Exception.class)
     public AlunosModel alterar(AlunosModel alunosModel) {
-        if (alunosModel.getCPF() > 0 && alunosModel.getTelefone1() != null) {
+        if (alunosModel.getEmailResposavel() != null && alunosModel.getTipoSanguinio() != null) {
             alunosModel.setAlunoStatus("Concluido");
         }
         return alunosRepositori.save(alunosModel);
