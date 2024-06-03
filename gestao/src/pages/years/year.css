@@ -1,70 +1,115 @@
+/* Geral */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+h1 {
+  font-size: 24px;
+  color: white;
+}
+
+/* Estrutura principal */
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  }
-  
+  padding: 20px;
+}
+
 .header {
   padding: 20px;
   width: 100%;
   text-align: center;
-  }
-  
-  /* App.css */
+  background-color: #004266;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .blackboard {
   width: 90%;
-  padding: 20px 20px 50px 20px;
+  padding: 20px;
   margin-top: 20px;
-  position: relative;
-  }
-   
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .folders {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
-  flex-direction: column;
-  }
-  
+}
+
 .folder {
   background-color: #004266;
   color: #fff;
-  padding: 23px;
+  padding: 20px;
   border-radius: 12px;
   text-align: center;
   margin-bottom: 20px;
   border: none;
   cursor: pointer;
   font-size: 2.5vh;
-  }
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .folder:hover {
   background-color: #005D8F;
-  }
+  transform: scale(1.05);
+}
 
-button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-  }
- 
-button span:after {
+.folder-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.folder-content span {
+  transition: padding-right 0.5s, transform 0.5s;
+}
+
+.folder-content span:after {
   content: '»';
   position: absolute;
   opacity: 0;
-  top: 0;
   right: -15px;
-  transition: 0.5s;
-  }
- 
-button:hover span {
+  transition: opacity 0.5s, right 0.5s;
+}
+
+.folder:hover .folder-content span {
   padding-right: 15px;
-  }
- 
-button:hover span:after {
+}
+
+.folder:hover .folder-content span:after {
   opacity: 1;
   right: 0;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .App {
+      padding: 10px;
   }
+
+  .header, .blackboard {
+      width: 100%;
+      margin: 0;
+  }
+
+  .folders {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .folder {
+      font-size: 2vh;
+  }
+}

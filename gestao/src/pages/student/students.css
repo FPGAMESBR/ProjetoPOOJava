@@ -1,127 +1,125 @@
-.app {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 20px;
-    }
+/* Geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
 
-/*Lista de estudantes*/
-
-.list-students {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    position: relative;
-    right: 25%;
-    }
-
-.table-header {
-    display: grid;
-    grid-template-columns: 3fr 1.5fr 1fr;
-    padding: 20px;
-    border: none;
-    background-color: #004266;
-    font-size: 16px;
-    border-bottom: #000 2px solid;
-    color: #fff;
-    justify-items: center;
-    }
-
-.container-students {
-    display: grid;
-    grid-template-columns: 600px;
-    margin: 20px;
-    border: 2px solid #000;
-    border-bottom: none;
-    }
-
-.student {
-    display: grid;
-    grid-template-columns: 3fr 1.5fr 1fr;
-    padding: 20px;
-    border-bottom: #000 2px solid;  
-    background-color: #fff;
-    cursor: pointer;
-    color: #000;
-    border-radius: 0%;
-    }
-
-.student:hover {
-    background-color: #669BBC;
-    }
-
-.student:nth-child(even) {
-    background-color: #EBEBEE; 
-    }
-
-.student:nth-child(even):hover {
-    background-color: #669BBC;   
-    } 
-
-/*FIM Lista de estudantes*/
-
-/*Detalhes do estudante*/
-
-.student-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    position: fixed;
-    left: 50%;
-    }
+.list-students > h1 {
+    font-size: 24px;
+    color: #004266;
+}
 
 .info-detail {
+    font-size: 24px;
+    color: #004266;
+}
+
+/* Estrutura principal */
+.app {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.list-students, .student-info {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
     width: 100%;
-    max-width: 600px;    
+    max-width: 600px;
+    height: 590px;
+}
+
+/* Lista de estudantes */
+.table-header, .student {
+    display: grid;
+    grid-template-columns: 3fr 1.5fr 1fr;
+    align-items: center;
+    padding: 15px;
+}
+
+.table-header {
+    background-color: #004266;
+    color: #fff;
+    font-weight: bold;
+}
+
+.container-students {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.student {
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.student:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+}
+
+.student:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.student:nth-child(even):hover {
+    background-color: #f1f1f1;
+}
+
+/* Detalhes do estudante */
+.info-detail, .grades-title {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .info {
     display: grid;
-    grid-template-columns: 300px 300px;;
-    max-width: 600px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
 }
 
 .info div {
-    border-bottom: #000 1px solid;
-    margin-top: 5px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .info h4 {
-    margin-bottom: 10px;
-}
-
-.info p {
     margin-bottom: 5px;
-}
-
-h2 {
-    margin-top: 10px;
 }
 
 .student-grades {
     display: grid;
-    grid-template-columns: 100px 100px 100px 100px 100px 100px ;
-    max-width: 600px;
-    border: #000 1px solid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.student-grades div {
-    border: #000 1px solid;
-    padding: 5px;
+.student-grades .grade {
+    padding: 10px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
 }
 
-.student-grades div p {
-    margin-top: 5px;
+/* Media Queries */
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .list-students, .student-info {
+        width: 90%;
+        height: 440px;
+    }
 }
-
-
-/*FIM Detalhes do estudante*/
-

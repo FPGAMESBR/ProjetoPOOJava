@@ -135,6 +135,15 @@ const HomePage = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const isToday = (day) => {
+    const today = new Date();
+    return (
+      day === today.getDate() &&
+      selectedMonth.getMonth() === today.getMonth() &&
+      selectedMonth.getFullYear() === today.getFullYear()
+    );
+  };
+
   return (
     <div className="container">
       <div className="menu">
@@ -160,7 +169,10 @@ const HomePage = () => {
               const currentDate = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), day);
               const formattedDate = currentDate.toISOString().split('T')[0];
               return (
-                <div key={index} className={`day ${day ? '' : 'empty'}`} onClick={() => handleDayClick(day)}>
+                <div 
+                  key={index} 
+                  className={`day ${day ? '' : 'empty'} ${isToday(day) ? 'today' : ''}`} 
+                  onClick={() => handleDayClick(day)}>
                   {day}
                   {events[formattedDate] && <span className="event-indicator" />}
                 </div>

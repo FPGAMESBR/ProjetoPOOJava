@@ -1,106 +1,90 @@
-/* Estilo geral da página */
-body, html {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+/* register.css */
+
+.containr {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+select {
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para o formulário de informações do aluno */
+.student-form,
+.parent-form {
+  width: 50%;
+  float: left;
+}
+
+/* Estilos para o formulário de informações dos pais */
+.parent-form {
+  float: right;
+}
+
+/* Contêiner para agrupar os formulários de aluno e de pais */
+.form-container {
+  overflow: hidden; /* Limpa o float dos formulários internos */
+}
+
+.teacher-page-button button {
+  background-color: #004266; /* Cor de fundo azul escura */
+  color: #fff; /* Cor do texto branca */
+  border: none; /* Remova a borda */
+  padding: 10px 20px; /* Adicione espaçamento interno */
+  border-radius: 5px; /* Adicione bordas arredondadas */
+  cursor: pointer; /* Altere o cursor ao pairar */
+  transition: background-color 0.3s; /* Adicione transição ao pairar */
+}
+
+.teacher-page-button button:hover {
+  background-color: #00364d; /* Escureça a cor de fundo ao pairar */
+}
+
+
+/* Adicionando regras de mídia para layout responsivo em dispositivos móveis */
+@media screen and (max-width: 600px) {
+  .student-form,
+  .parent-form {
+    width: 100%; /* Alterando a largura para 100% para que ocupem toda a largura da tela */
+    float: none; /* Removendo o float para que os formulários sejam exibidos em uma lista */
+    margin-right: 0; /* Removendo a margem direita */
+    margin-left: 0; /* Removendo a margem esquerda */
   }
-  
-  /* Container principal */
-  .contain {
-    display: flex;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Campo preto no lado esquerdo */
-  .sidebar {
-    width: 110px;
-    background-color: #0c1446; /* Azul escuro */
-    height: 100%;
-  }
-  
-  /* Container do formulário */
-  .form-container {
-    display: flex;
-    flex-grow: 1; /* Para ocupar todo o espaço restante */
-    padding: 20px;
-    flex-wrap: wrap; /* Envolve os formulários em uma linha */
-  }
-  
-  /* Formulários divididos */
-  .form-half {
-    width: calc(50% - 20px); /* Cada metade do formulário ocupa metade do espaço disponível com uma margem entre eles */
-  }
-  
-  /* Títulos */
-  h2 {
-    text-align: center;
-    color: #0c1446; /* Azul escuro */
-    margin-bottom: 20px;
-  }
-  
-  /* Grupos de formulário */
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  /* Labels */
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333; /* Preto */
-  }
-  
-  /* Inputs e Selects */
-  input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f2f2f2; /* Cinza claro */
-    font-size: 14px;
-    color: #333; /* Preto */
-  }
-  
-  /* Botão de envio */
-  button {
-    width: 100%;
-    padding: 15px;
-    background-color: #0c1446; /* Azul escuro */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #1b2a7e; /* Azul mais claro */
-  }
-  
-  /* Ajustes para dispositivos móveis */
-  @media (max-width: 768px) {
-    .contain {
-      flex-direction: column;
-    }
-  
-    .sidebar {
-      width: 100%;
-      height: 110px;
-    }
-  
-    .form-container {
-      width: 100%;
-      flex-direction: column;
-    }
-  
-    .form-half {
-      width: 100%;
-    }
-  }  
+}

@@ -1,281 +1,288 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    max-width: 100%; /* ou um valor específico em pixels, em vw (viewport width) ou em qualquer outra unidade */
-    margin: 0 auto; /* centraliza o conteúdo */
-    overflow-x: hidden; /* evita a rolagem horizontal */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-  
-  html, body, #root {
-    height: 100%;
-  }
-  .container {
-    background-image: url('../../assets/ground.jpg');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    height: 100vh; /* Usando 100vh para ocupar a altura total da janela do navegador */
-    overflow-x: hidden;
+body {
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+.container {
+  background-image: url('../../assets/ground.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .menu {
-    width: 200px;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item > button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  padding: 10px 10px;
+  color: #fff;
+}
+
+.menu-item:hover {
+  background-color: #555;
+}
+
+.menu-item.active {
+  background-color: #007bff;
+}
+
+.menu-item i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.menu-item span {
+  font-size: 16px;
+}
+
+.hamburger {
+  display: none;
 }
 
 .content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto; /* Adicionando overflow-y para rolagem vertical caso o conteúdo seja maior que a altura da janela */
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
-  
-  .menu-item {
-    cursor: pointer;
-    padding: 10px 0;
-    transition: background-color 0.3s ease;
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 50px 135.5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button:active {
+  background-color: #004080;
+}
+
+.button img,
+.button i {
+  margin-right: 5px;
+}
+
+.calendar {
+  margin-top: 20px;
+}
+
+.month {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+  padding: 10px;
+  border: 1px solid rgb(112, 108, 108);
+  text-align: center;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.day.empty {
+  background-color: transparent;
+  border: none;
+  cursor: default;
+}
+
+.day.today {
+  background-color: #D3E9FF;
+  border-color: #005D8F;
+}
+
+.day:hover {
+  background-color: #f0f0f0;
+}
+
+.event-indicator {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background-color: #ff0000;
+  border-radius: 50%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+}
+
+.button-container button:active {
+  background-color: #004080;
+}
+
+.logo2 {
+  display: none;
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
   }
 
-  .menu-item > button {
-    display: flex;
+  .menu {
+    width: 100%;
+    height: 10%;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    background-color: transparent;
-    border: none;
-    padding: 10px 10px;
-    color: #fff;
-  }
-  
-  .menu-item:hover {
-    background-color: #555; /* Cor de fundo ao passar o mouse */
-  }
-  
-  .menu-item.active {
-    background-color: #007bff; /* Cor de fundo do item selecionado */
-  }
-  
-  .menu-item i {
-    margin-right: 10px;
-    font-size: 18px;
-  }
-  
-  .menu-item span {
-    font-size: 16px;
+    padding: 0 10px;
   }
 
-  .hamburger {
-    display: none; /* Esconde o ícone do menu por padrão */
-  }
-  
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .button {
-    display: flex;
-    align-items: center;
-    padding: 50px 135.5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-  
-  .button img,
-  .button i {
-    margin-right: 5px; /* Adiciona um espaço à direita do ícone */
-  }
-  
-  .calendar {
-    margin-top: 20px;
-  }
-  
-  .month {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-  }
-  
-  .day {
-    padding: 10px;
-    border: 1px solid rgb(112, 108, 108);  
-    text-align: center;
-    height: 40px;
-  
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .button-container button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  .button-container button:active {
-    background-color: #004080;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  .button:active {
-    background-color: #004080;
-  }
-  
-  .day {
-    position: relative;
+  .menu > .logo {
+    display: none;
   }
 
   .logo2 {
+    display: block;
+    width: 70%;
+    margin-left: 15%;
+  }
+
+  .menu-item {
+    display: 0;
+  }
+
+  .hamburger {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    display: block;
+    padding: 0;
+    height: 0;
+    margin-top: -30px;
+    margin-left: 240px;
+  }
+
+  .menu.open .menu-item {
+    display: block;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .content {
+    display: block;
+    padding: 10px;
+  }
+
+  .top {
     display: none;
   }
-  
-  .event-indicator {
-    position: absolute;
-    top: 2px; /* Ajuste conforme necessário */
-    right: 2px; /* Ajuste conforme necessário */
-    width: 6px;
-    height: 6px;
-    background-color: #ff0000; /* Cor do indicador */
-    border-radius: 50%; /* Para torná-lo circular */
+
+  .top.hide {
+    display: contents;
   }
-  
-  
-  /* Estilos para dispositivos móveis */
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
 
-    .menu {
-      width: 100%;
-      height: 10%;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-    }
-    
-    .menu > .logo {
-      display: none;
-    }
-
-    .logo2 {
-      display: block;
-      width: 70%;
-      margin-left: 15%;
-    }
-
-    .menu-item {
-      display: 0; /* Esconde os itens do menu por padrão */
-    }
-
-    .hamburger {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-      display: block;
-      padding: 0;
-      height: 0;
-      margin-top: -30px;
-      margin-left: 240px;
-    }
-
-    .menu.open .menu-item {
-      display: block;
-      flex: 1;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .content {
-      display: block; /* Exibe o conteúdo por padrão */
-      padding: 10px;
-    }
-
-    .top {
-      display: none;
-    }
-
-    .top.hide {
-      display: contents; /* Esconde o conteúdo quando o menu está aberto */
-    }
-
-    .top {
-      flex-direction: column;
-    }
-
-    .button {
-      padding: 20px;
-      margin-bottom: 10px;
-      flex: 1;
-      text-align: center;
-    }
-
-
-    .calendar {
-      margin-top: 10px;
-    }
-
-    .month {
-      font-size: 18px;
-      text-align: center;
-    }
-
-    .days {
-      grid-template-columns: repeat(7, 1fr);
-      grid-gap: 2px;
-    }
-
-    .day {
-      padding: 5px;
-      height: 30px;
-      font-size: 12px;
-    }
-
-    .button-container {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .button-container button {
-      margin-bottom: 10px;
-    }
+  .top {
+    flex-direction: column;
   }
+
+  .button {
+    padding: 20px;
+    margin-bottom: 10px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .calendar {
+    margin-top: 10px;
+  }
+
+  .month {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .days {
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 2px;
+  }
+
+  .day {
+    padding: 5px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button-container button {
+    margin-bottom: 10px;
+  }
+}
