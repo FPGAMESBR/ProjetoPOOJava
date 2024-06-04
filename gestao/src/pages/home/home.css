@@ -289,3 +289,16 @@ html, body, #root {
     margin-bottom: 10px;
   }
 }
+
+@media screen and (max-width: 768px){
+  .button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .button {
+    width: 240px;
+  }
+} 
+  
