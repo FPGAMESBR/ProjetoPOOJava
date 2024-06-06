@@ -3,27 +3,29 @@ import axios from 'axios';
 import './register.css';
 
 const StudentRegistration = () => {
-  const [student, setStudent] = useState({
-    Nome: '',
-    Genero: '',
-    Serie: '',
-    NumeroCertidaoNascimento: '',
-    DataNascimento: '',
-    Naturalidade: '',
-    Nacionalidade: '',
-    RG: '',
-    CPF: '',
-    NIS: '',
-    TipoSanguineo: '',
-    NomePai: '',
-    NomeMae: '',
-    EmailResponsavel: '',
-    CPFPai: '',
-    CPFmae: '',
-    RGPai: '',
-    RGMae: '',
-    Endereco: '',
+  const [servico, setServico] = useState({
+    cpf:'',
+    rgAluno:'',
+    nis:'',
+    numeroCertidao:'',
+    serieAno:'',
+    nomeAluno:'',
+    alunoStatus:'',
+    naturnalidadeEstado:'',
+    nacionalidade:'',
+    tipoSanguinio:'',
+    genero:'',
+    nomePai:'',
+    nomeMae:'',
+    emailResposavel:'',
+    cpfPai:'',
+    cpfMae:'',
+    rgPai:'',
+    rgMae:'',
+    endereco:'',
+    dataNascimento:''
   });
+  const [servicos, setServicos]=useState({});
 
   const seriesOptions = [
     { name: 'Maternal', series: 'maternal' },
@@ -40,7 +42,7 @@ const StudentRegistration = () => {
     { name: '9° Ano', series: 'ano9' }
   ];
 
-  const isValidRG = (rg) => {
+ /* const isValidRG = (rg) => {
     if (!/^\d{9}$/.test(rg)) {
       return false;
     }
@@ -96,15 +98,15 @@ const StudentRegistration = () => {
     return true;
   };
 
-  const handleChange = (e) => {
+  /*const handleChange = (e) => {
     const { name, value } = e.target;
     setStudent({
       ...student,
       [name]: value
     });
-  };
+  };*/
 
-  const handleSubmit = async (e) => {
+  /*const handleSubmit = async (e) => {
     e.preventDefault();
   
     const requiredFields = ['Nome', 'Genero', 'Serie', 'NumeroCertidaoNascimento', 'DataNascimento', 'Naturalidade', 'Nacionalidade', 'RG', 'CPF', 'NIS', 'TipoSanguineo', 'NomePai', 'NomeMae', 'EmailResponsavel', 'CPFPai', 'CPFmae', 'RGPai', 'RGMae', 'Endereco'];
@@ -136,7 +138,17 @@ const StudentRegistration = () => {
     } catch (error) {
       console.error('Houve um erro ao registrar o estudante!', error);
     }
-  };
+  };*/
+  function handleChange(event){
+    setServico({...servico,[event.target.name]:event.target.value})
+  }
+
+  function handleSubmit(event){
+    event.preventDefault();
+    axios.post('http://localhost:8080/api/alunos/', servico).then(result=>{
+      console.log(result)
+    })
+  }
   
   return (
     <div className="containr">
@@ -144,11 +156,11 @@ const StudentRegistration = () => {
         <h2>Registro de Aluno</h2>
         <div className="student-form">
           <label>Nome:</label>
-          <input type="text" name="Nome" value={student.Nome} onChange={handleChange} required />
+          <input type="text" name="nomeAluno" value={servico.nomeAluno} onChange={handleChange} required />
         </div>
         <div className="student-form">
           <label>Gênero:</label>
-          <select name="Genero" value={student.Genero} onChange={handleChange} required>
+          <select name="genero" value={servico.genero} onChange={handleChange} required>
             <option value="">Selecione</option>
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
@@ -157,7 +169,7 @@ const StudentRegistration = () => {
         </div>
         <div className="student-form">
           <label>Série/Ano:</label>
-          <select name="Serie" value={student.Serie} onChange={handleChange} required>
+          <select name="serieAno" value={servico.serieAno} onChange={handleChange} required>
             <option value="">Selecione</option>
             {seriesOptions.map(option => (
               <option key={option.series} value={option.series}>{option.name}</option>
@@ -166,7 +178,7 @@ const StudentRegistration = () => {
         </div>
         <div className="student-form">
           <label>Naturalidade/Estado:</label>
-          <select name="Naturalidade" value={student.Naturalidade} onChange={handleChange} required>
+          <select name="naturnalidadeEstado" value={servico.naturnalidadeEstado} onChange={handleChange} required>
             <option value="">Selecione</option>
             <option value="Agrestina">Agrestina</option>
             <option value="Outro">Outro</option>
@@ -174,7 +186,7 @@ const StudentRegistration = () => {
         </div>
         <div className="student-form">
           <label>Nacionalidade:</label>
-          <select name="Nacionalidade" value={student.Nacionalidade} onChange={handleChange} required>
+          <select name="nacionalidade" value={servico.nacionalidade} onChange={handleChange} required>
             <option value="">Selecione</option>
             <option value="Brasil">Brasil</option>
             <option value="Outro">Outro</option>
@@ -182,23 +194,23 @@ const StudentRegistration = () => {
         </div>
         <div className="student-form">
           <label>NIS:</label>
-          <input type="text" name="NIS" value={student.NIS} onChange={handleChange} required />
+          <input type="text" name="nis" value={servico.nis} onChange={handleChange} required />
         </div>
         <div className="student-form">
           <label>RG:</label>
-          <input type="text" name="RG" value={student.RG} onChange={handleChange} required />
+          <input type="text" name="rgAluno" value={servico.rgAluno} onChange={handleChange} required />
         </div>
         <div className="student-form">
           <label>Endereço:</label>
-          <input type="text" name="Endereco" value={student.Endereco} onChange={handleChange} required />
+          <input type="text" name="endereco" value={servico.endereco} onChange={handleChange} required />
         </div>
         <div className="student-form">
           <label>CPF:</label>
-          <input type="text" name="CPF" value={student.CPF} onChange={handleChange} required />
+          <input type="text" name="cpf" value={servico.cpf} onChange={handleChange} required />
         </div>
         <div className="student-form">
           <label>Tipo Sanguíneo:</label>
-          <select name="TipoSanguineo" value={student.TipoSanguineo} onChange={handleChange} required>
+          <select name="tipoSanguinio" value={servico.tipoSanguinio} onChange={handleChange} required>
             <option value="">Selecione</option>
             <option value="A+">A+</option>
             <option value="B+">B+</option>
@@ -213,33 +225,33 @@ const StudentRegistration = () => {
         </div>
         <div className="parent-form">
           <label>Nome do Pai:</label>
-          <input type="text" name="NomePai" value={student.NomePai} onChange={handleChange} required />
+          <input type="text" name="nomePai" value={servico.nomePai} onChange={handleChange} required />
         </div>
         <div className="parent-form">
           <label>Nome da Mãe:</label>
-          <input type="text" name="NomeMae" value={student.NomeMae} onChange={handleChange} required />
+          <input type="text" name="nomeMae" value={servico.nomeMae} onChange={handleChange} required />
         </div>
         <div className="parent-form">
           <label>Email do Responsável:</label>
-          <input type="email" name="EmailResponsavel" value={student.EmailResponsavel} onChange={handleChange} required />
+          <input type="email" name="emailResposavel" value={servico.emailResposavel} onChange={handleChange} required />
         </div>
         <div className="parent-form">
           <label>CPF do Pai:</label>
-          <input type="text" name="CPFPai" value={student.CPFPai} onChange={handleChange} required />
+          <input type="text" name="cpfPai" value={servico.cpfPai} onChange={handleChange} required />
         </div>
         <div className="parent-form">
           <label>CPF da Mãe:</label>
-          <input type="text" name="CPFmae" value={student.CPFmae} onChange={handleChange} required />
+          <input type="text" name="cpfMae" value={servico.cpfMae} onChange={handleChange} required />
         </div>
         <div className="parent-form">
           <label>RG do Pai:</label>
-          <input type="text" name="RGPai" value={student.RGPai} onChange={handleChange} required />
+          <input type="text" name="rgPai" value={servico.rgPai} onChange={handleChange} required />
         </div>
         <div className="parent-form">
           <label>RG da Mãe:</label>
-          <input type="text" name="RGMae" value={student.RGMae} onChange={handleChange} required />
+          <input type="text" name="rgMae" value={servico.rgMae} onChange={handleChange} required />
         </div>
-        <button type="submit">Registrar</button>
+        <input type="submit" value="Cadastrar"></input>
       </form>
     </div>
   );
