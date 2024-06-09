@@ -18,63 +18,7 @@ function StudentInfo({ student }) {
 
     return (
         <div className='info'>
-            <div>
-                <h4>Nome Completo</h4>
-                <p>{student.name}</p>
-            </div>
-            <div>
-                <h4>Data de Nascimento</h4>
-                <p>{student.bithdate}</p>
-            </div>
-            <div>
-                <h4>Gênero</h4>
-                <p>{student.gender}</p>
-            </div>
-            <div>
-                <h4>Endereço</h4>
-                <p>{student.address}</p>
-            </div>
-            <div>
-                <h4>Email</h4>
-                <p>{student.email}</p>
-            </div>
-            <div>
-                <h4>Email Responsavel</h4>
-                <p>{student.email_responsible}</p>
-            </div>
-            <div>
-                <h4>CPF</h4>
-                <p>{student.cpf}</p>
-            </div>
-            <div>
-                <h4>RG</h4>
-                <p>{student.rg}</p>
-            </div>
-            <div>
-                <h4>Telefone</h4>
-                <p>{student.phone}</p>
-            </div>
-            <div>
-                <h4>Telefone Responsavel</h4>
-                <p>{student.phone_responsible}</p>
-            </div>
-            <div>
-                <h4>Série/Ano</h4>
-                <p>{student.year}</p>
-            </div>
-            <div>
-                <h4>Turno</h4>
-                <p>{student.shift}</p>
-            </div>
-            <h2 className='grades-title'>Notas</h2>
-            <div className='student-grades'>
-                {student.grades.map((grade, index) => (
-                    <div className='grade' key={index}>
-                        <h4>{grade.subject}</h4>
-                        <p>{grade.score}</p>
-                    </div>
-                ))}
-            </div>
+            {/* Renderizar todas as informações do aluno aqui */}
         </div>
     );
 }

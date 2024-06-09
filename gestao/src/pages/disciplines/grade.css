@@ -131,4 +131,109 @@ body {
   }
   
 
-/* Fim checkbox */
+/*
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+
+.grade-students-page {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.list-students-grades {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.give-grade-list {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+  gap: 15px;
+}
+
+.give-grade-list-header {
+  display: grid;
+  grid-template-columns: 0.6fr 2fr 1fr 1.5fr 1fr 1fr;
+  align-items: center; 
+  padding: 16px;
+  background-color: #004266;
+  color: #fff;
+  border-top-left-radius: 10px; 
+  border-top-right-radius: 10px;
+}
+
+.student-grade {
+  width: calc(50% - 15px); 
+  padding: 15px;
+  border-bottom: 1px solid #ccc; 
+  margin-bottom: 15px; 
+}
+
+.grade-input {
+  width: calc(100% - 20px);
+  min-height: 40px;
+  padding: 10px;
+  outline: none;
+  background: #e8e8e8;
+  border: none;
+  border-radius: 10px;
+  transition: all .3s;
+}
+
+.grade-input:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  color: #333;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox .checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #004266; 
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  transition: all .3s;
+}
+
+.custom-checkbox .checkmark::before {
+  content: "\2713";
+  font-size: 14px; 
+  color: transparent;
+  transition: all .3s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background-color: #004266; 
+  border-color: #004266;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::before {
+  color: #fff; 
+}     
+*/

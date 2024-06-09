@@ -4,19 +4,19 @@ import "./disc.css";
 
 function DiscPage() {
   const disciplines = [
-    { name: "Português", icon: <i class="fa-solid fa-book"></i>, path: "/.../portugues" },
-    { name: "Redação", icon: <i class="fa-solid fa-pencil"></i>, path: "/.../redacao" },
-    { name: "Inglês", icon: <i class="fa-solid fa-flag-usa"></i>, path: "/.../ingles" },
-    { name: "Matemática", icon: <i class="fa-solid fa-calculator"></i>, path: "/.../matematica" },
-    { name: "Geometria", icon: <i class="fa-regular fa-cube"></i>, path: "/.../geometria" },
-    { name: "Ciências", icon: <i class="fa-light fa-atom"></i>, path: "/.../ciencias" },
-    { name: "História", icon: <i class="fa-regular fa-landmark"></i>, path: "/.../historia" },
-    { name: "Geografia", icon: <i class="fa-regular fa-globe"></i>, path: "/.../geografia" },
-    { name: "Filosofia", icon: <i class="fa-solid fa-question"></i>, path: "/.../filosofia" },
-    { name: "Arte", icon: <i class="fa-regular fa-paintbrush"></i>, path: "/.../arte" },
-    { name: "Educação Física", icon: <i class="fa-solid fa-volleyball"></i>, path: "/.../educacao-fisica" },
-    { name: "Direito e Cidadania", icon: <i class="fa-solid fa-leaf"></i>, path: "/.../direito-e-cidadania" },
-    { name: "Religião", icon: <i class="fa-solid fa-book-bible"></i>, path: "/.../religiao" },
+    { name: "Português", icon: <i className="fa-solid fa-book"></i>, path: "/grade/portugues" },
+    { name: "Redação", icon: <i className="fa-solid fa-pencil"></i>, path: "/grade/redacao" },
+    { name: "Inglês", icon: <i className="fa-solid fa-flag-usa"></i>, path: "/grade/ingles" },
+    { name: "Matemática", icon: <i className="fa-solid fa-calculator"></i>, path: "/grade/matematica" },
+    { name: "Geometria", icon: <i className="fa-regular fa-cube"></i>, path: "/grade/geometria" },
+    { name: "Ciências", icon: <i className="fa-light fa-atom"></i>, path: "/grade/ciencias" },
+    { name: "História", icon: <i className="fa-regular fa-landmark"></i>, path: "/grade/historia" },
+    { name: "Geografia", icon: <i className="fa-regular fa-globe"></i>, path: "/grade/geografia" },
+    { name: "Filosofia", icon: <i className="fa-solid fa-question"></i>, path: "/grade/filosofia" },
+    { name: "Arte", icon: <i className="fa-regular fa-paintbrush"></i>, path: "/grade/arte" },
+    { name: "Educação Física", icon: <i className="fa-solid fa-volleyball"></i>, path: "/grade/educacao-fisica" },
+    { name: "Direito e Cidadania", icon: <i className="fa-solid fa-leaf"></i>, path: "/grade/direito-e-cidadania" },
+    { name: "Religião", icon: <i className="fa-solid fa-book-bible"></i>, path: "/grade/religiao" },
   ];
 
   return (
@@ -29,8 +29,8 @@ function DiscPage() {
           <ul className="Itens">
             {disciplines.map((discipline) => (
               <li key={discipline.path}>
-                <Link className="disc-link" to={discipline.path}>
-                  {discipline.name} {discipline.icon}
+                <Link className="disc-link" to={`${discipline.path}?name=${discipline.name}`}>
+                  {discipline.icon} {discipline.name}
                 </Link>
               </li>
             ))}

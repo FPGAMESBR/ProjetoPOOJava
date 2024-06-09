@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/students" element={<Students />} />
         <Route path="/students/:serieAluno" element={<Students />} />
-        <Route path="/grade" element={<Grade/>} />
+        <Route path="/grade/:subject" element={<Grade />} />
       </Routes>
     </BrowserRouter>
   );
