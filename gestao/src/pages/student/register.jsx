@@ -147,6 +147,8 @@ const StudentRegistration = () => {
     event.preventDefault();
     axios.post('http://localhost:8080/api/alunos/', servico).then(result=>{
       console.log(result)
+      alert("Aluno cadastrado com sucesso!");
+      window.location.reload();
     })
   }
   

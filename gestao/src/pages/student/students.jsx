@@ -3,13 +3,13 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './students.css';
 
-function StudentButton({ nomeAluno, dataNascimento, media, notas, onClick }) {
+function StudentButton({ nomeAluno, dataNascimento, media, onClick }) {
     return (
         <div className='student'>
             <p>{nomeAluno}</p>
             <p>{dataNascimento}</p>
             <p>{media}</p>
-            <button onClick={() => onClick(notas)}>Detalhes</button>
+            <button onClick={onClick}>Detalhes</button>
         </div>
     );
 }
@@ -134,9 +134,7 @@ function Students() {
             });
     }, [serieAluno]);
 
-    const handleStudentDetails = (notas) => {
-        setSelectedStudent({ ...selectedStudent, notas });
-    };
+    
 
     return (
         <div className='app'>
@@ -153,9 +151,8 @@ function Students() {
                             key={student.cpf}
                             nomeAluno={student.nomeAluno}
                             dataNascimento={student.dataNascimento}
-                            media={student.notas.media}
-                            notas={student.notas}
-                            onClick={handleStudentDetails}
+                            media={student.media} // Considerando que "media" está diretamente no objeto do aluno
+                            onClick={() => setSelectedStudent(student)}
                         />
                     ))}
                 </div>
