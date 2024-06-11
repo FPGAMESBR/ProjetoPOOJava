@@ -125,7 +125,7 @@ function Students() {
     const [selectedStudent, setSelectedStudent] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/alunos/`)
+        axios.get(`http://localhost:8080/api/alunos/alunos?serieAno=${serieAluno}`)
             .then(response => {
                 setStudents(response.data);
             })
