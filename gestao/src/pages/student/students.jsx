@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './students.css';
 
-function StudentButton({ nomeAluno, dataNascimento, media, onClick }) {
+function StudentButton({ nomeAluno, dataNascimento, alunoStatus, onClick, onDelete }) {
     return (
         <div className='student'>
             <p>{nomeAluno}</p>
             <p>{dataNascimento}</p>
-            <p>{media}</p>
+            <p>{alunoStatus}</p>
             <button onClick={onClick}>Detalhes</button>
+            <button onClick={onDelete}>Deletar</button>
         </div>
     );
 }
@@ -134,7 +135,20 @@ function Students() {
             });
     }, [serieAluno]);
 
-    
+    const handleDelete = (cpf) => {
+        axios.delete(`http://localhost:8080/api/alunos/${cpf}`)
+            .then(() => {
+                alert('Aluno deletado com sucesso!');
+                setStudents(students.filter(student => student.cpf !== cpf));
+                if (selectedStudent && selectedStudent.cpf === cpf) {
+                    setSelectedStudent(null);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao deletar aluno', error);
+                alert('Erro ao deletar aluno.');
+            });
+    };
 
     return (
         <div className='app'>
@@ -144,15 +158,16 @@ function Students() {
                     <div className='table-header'>
                         <p>Alunos</p>
                         <p>Nascimento</p>
-                        <p>Média</p>
+                        <p>Status</p>
                     </div>
                     {students.map(student => (
                         <StudentButton
                             key={student.cpf}
                             nomeAluno={student.nomeAluno}
                             dataNascimento={student.dataNascimento}
-                            media={student.media} // Considerando que "media" está diretamente no objeto do aluno
+                            alunoStatus={student.alunoStatus}
                             onClick={() => setSelectedStudent(student)}
+                            onDelete={() => handleDelete(student.cpf)}
                         />
                     ))}
                 </div>
@@ -166,3 +181,4 @@ function Students() {
 }
 
 export default Students;
+

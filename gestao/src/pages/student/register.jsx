@@ -42,103 +42,7 @@ const StudentRegistration = () => {
     { name: '9° Ano', series: 'ano9' }
   ];
 
- /* const isValidRG = (rg) => {
-    if (!/^\d{9}$/.test(rg)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const isValidCPF = (cpf) => {
-    if (!/^\d{11}$/.test(cpf)) {
-      return false;
-    }
-
-    if (/^(\d)\1{10}$/.test(cpf)) {
-      return false;
-    }
-
-    let sum = 0;
-    for (let i = 0; i < 9; i++) {
-      sum += parseInt(cpf.charAt(i)) * (10 - i);
-    }
-    let remainder = sum % 11;
-    if (remainder === 0 || remainder === 1) {
-      remainder = 0;
-    } else {
-      remainder = 11 - remainder;
-    }
-    if (parseInt(cpf.charAt(9)) !== remainder) {
-      return false;
-    }
-
-    sum = 0;
-    for (let i = 0; i < 10; i++) {
-      sum += parseInt(cpf.charAt(i)) * (11 - i);
-    }
-    remainder = sum % 11;
-    if (remainder === 0 || remainder === 1) {
-      remainder = 0;
-    } else {
-      remainder = 11 - remainder;
-    }
-    if (parseInt(cpf.charAt(10)) !== remainder) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const isValidNIS = (nis) => {
-    if (!/^\d{11}$/.test(nis)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  /*const handleChange = (e) => {
-    const { name, value } = e.target;
-    setStudent({
-      ...student,
-      [name]: value
-    });
-  };*/
-
-  /*const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    const requiredFields = ['Nome', 'Genero', 'Serie', 'NumeroCertidaoNascimento', 'DataNascimento', 'Naturalidade', 'Nacionalidade', 'RG', 'CPF', 'NIS', 'TipoSanguineo', 'NomePai', 'NomeMae', 'EmailResponsavel', 'CPFPai', 'CPFmae', 'RGPai', 'RGMae', 'Endereco'];
-    const missingFields = requiredFields.filter(field => !student[field]);
-  
-    if (missingFields.length > 0) {
-      console.error('Por favor, preencha todos os campos obrigatórios.');
-      return;
-    }
-  
-    if (!isValidRG(student.RG)) {
-      console.error('RG inválido. Por favor, insira um RG válido.');
-      return;
-    }
-  
-    if (!isValidCPF(student.CPF)) {
-      console.error('CPF inválido. Por favor, insira um CPF válido.');
-      return;
-    }
-  
-    if (!isValidNIS(student.NIS)) {
-      console.error('NIS inválido. Por favor, insira um NIS válido.');
-      return;
-    }
-  
-    try {
-      const response = await axios.post('http://localhost:8080/api/alunos/', student);
-      console.log('Estudante registrado com sucesso:', response.data);
-    } catch (error) {
-      console.error('Houve um erro ao registrar o estudante!', error);
-    }
-  };*/
+ 
   function handleChange(event){
     setServico({...servico,[event.target.name]:event.target.value})
   }
@@ -150,6 +54,9 @@ const StudentRegistration = () => {
       alert("Aluno cadastrado com sucesso!");
       window.location.reload();
     })
+    .catch(error => {
+      console.error('CPF já existente', error);
+  });
   }
   
   return (
@@ -204,7 +111,7 @@ const StudentRegistration = () => {
         </div>
         <div className="student-form">
           <label>Endereço:</label>
-          <input type="text" name="endereco" value={servico.endereco} onChange={handleChange} required />
+          <input type="text" name="endereco" value={servico.endereco} onChange={handleChange}  />
         </div>
         <div className="student-form">
           <label>CPF:</label>
@@ -235,23 +142,23 @@ const StudentRegistration = () => {
         </div>
         <div className="parent-form">
           <label>Email do Responsável:</label>
-          <input type="email" name="emailResposavel" value={servico.emailResposavel} onChange={handleChange} required />
+          <input type="email" name="emailResposavel" value={servico.emailResposavel} onChange={handleChange}  />
         </div>
         <div className="parent-form">
           <label>CPF do Pai:</label>
-          <input type="text" name="cpfPai" value={servico.cpfPai} onChange={handleChange} required />
+          <input type="text" name="cpfPai" value={servico.cpfPai} onChange={handleChange}  />
         </div>
         <div className="parent-form">
           <label>CPF da Mãe:</label>
-          <input type="text" name="cpfMae" value={servico.cpfMae} onChange={handleChange} required />
+          <input type="text" name="cpfMae" value={servico.cpfMae} onChange={handleChange}  />
         </div>
         <div className="parent-form">
           <label>RG do Pai:</label>
-          <input type="text" name="rgPai" value={servico.rgPai} onChange={handleChange} required />
+          <input type="text" name="rgPai" value={servico.rgPai} onChange={handleChange}  />
         </div>
         <div className="parent-form">
           <label>RG da Mãe:</label>
-          <input type="text" name="rgMae" value={servico.rgMae} onChange={handleChange} required />
+          <input type="text" name="rgMae" value={servico.rgMae} onChange={handleChange}  />
         </div>
         <input type="submit" value="Cadastrar"></input>
       </form>
