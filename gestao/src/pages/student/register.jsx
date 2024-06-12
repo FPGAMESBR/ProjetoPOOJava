@@ -25,7 +25,7 @@ const StudentRegistration = () => {
     endereco:'',
     dataNascimento:''
   });
-  const [servicos, setServicos]=useState({});
+  const [servicos, setServicos] = useState({});
 
   const seriesOptions = [
     { name: 'Maternal', series: 'maternal' },
@@ -100,6 +100,10 @@ const StudentRegistration = () => {
             <option value="Brasil">Brasil</option>
             <option value="Outro">Outro</option>
           </select>
+        </div>
+        <div className="student-form">
+          <label>Data de Nascimento:</label>
+          <input type="date" name="dataNascimento" value={servico.dataNascimento} onChange={handleChange} required />
         </div>
         <div className="student-form">
           <label>NIS:</label>

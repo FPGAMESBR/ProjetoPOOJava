@@ -17,6 +17,7 @@
 
 input[type="text"],
 input[type="email"],
+input[type="date"],
 select {
   width: calc(100% - 22px);
   padding: 10px;
@@ -30,7 +31,7 @@ select {
   cursor: pointer;
 }
 
-button[type="submit"] {
+input[type="submit"] {
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;
@@ -42,7 +43,7 @@ button[type="submit"] {
   width: 100%;
 }
 
-button[type="submit"]:hover {
+input[type="submit"]:hover {
   background-color: #45a049;
 }
 
