@@ -112,7 +112,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
   const goToYears = () => navigate('/years');
-  const goToTeachers = () => navigate('/teachers');
   const goToDisciplines = () => navigate('/disc');
   const goToRegister = () => navigate('/register');
 
@@ -148,7 +147,7 @@ const HomePage = () => {
     <div className="container">
       <div className="menu">
         <img src={logo} className="logo" alt="Logo da Escola" />
-        <div className="menu-item"><button data-testid='page-button' onClick={goToRegister}><i class="fa-solid fa-plus"></i></button></div>
+        <div className="menu-item"></div>
         <button className="hamburger" onClick={toggleMenu}>
           <i className="fas fa-bars"></i>
       </button>
@@ -156,7 +155,7 @@ const HomePage = () => {
       <div className="content">
       <div className={`top ${menuOpen ? 'hide' : ''}`}>
           <div className="button" onClick={goToYears}><i className="fas fa-calendar-alt"></i> Salas</div>
-          <div className="button" onClick={goToTeachers}><i className="fas fa-graduation-cap"></i> Professores</div>
+          <div className="button" onClick={goToRegister}><i class="fa-solid fa-cabinet-filing"></i> Registrar</div>
           <div className="button" onClick={goToDisciplines}><i className="fas fa-book-open"></i> Disciplinas</div>
         </div>
         <div className="calendar">

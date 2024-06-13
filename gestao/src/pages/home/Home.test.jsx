@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HomePage from "./HomePage";
 import YearPage from "../years/YearPage";
-import TeacherPage from "../teachers/TeacherPage";
 import DiscPage from "../disc/discpage";
 import Register from "../student/register";
 import Students from "../student/students";
@@ -16,7 +15,6 @@ test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/years" element={<YearPage />} />
         <Route path="/students" element={<Students />} />
-        <Route path="/teachers" element={<TeacherPage />} />
         <Route path="/disc" element={<DiscPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/grade/:subject" element={<Grade />} />
@@ -32,12 +30,6 @@ test('givenHome_whenRendered_thenShowWelcomeMessage', async () => {
   await userEvent.click(yearsButton);
   expect(await screen.findByText(/Welcome to the Years Page/i)).toBeInTheDocument();
   expect(window.location.pathname).toBe('/years');
-
-  // Navigate to Teachers Page
-  const teachersButton = screen.getByRole('button', { name: /Professores/i });
-  await userEvent.click(teachersButton);
-  expect(await screen.findByText(/Welcome to the Teachers Page/i)).toBeInTheDocument();
-  expect(window.location.pathname).toBe('/teachers');
 
   // Navigate to Disciplines Page
   const discButton = screen.getByRole('button', { name: /Disciplinas/i });
