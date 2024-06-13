@@ -4,28 +4,27 @@ import './register.css';
 
 const StudentRegistration = () => {
   const [servico, setServico] = useState({
-    cpf:'',
-    rgAluno:'',
-    nis:'',
-    numeroCertidao:'',
-    serieAno:'',
-    nomeAluno:'',
-    alunoStatus:'',
-    naturnalidadeEstado:'',
-    nacionalidade:'',
-    tipoSanguinio:'',
-    genero:'',
-    nomePai:'',
-    nomeMae:'',
-    emailResposavel:'',
-    cpfPai:'',
-    cpfMae:'',
-    rgPai:'',
-    rgMae:'',
-    endereco:'',
-    dataNascimento:''
+    cpf: '',
+    rgAluno: '',
+    nis: '',
+    numeroCertidao: '',
+    serieAno: '',
+    nomeAluno: '',
+    alunoStatus: '',
+    naturnalidadeEstado: '',
+    nacionalidade: '',
+    tipoSanguinio: '',
+    genero: '',
+    nomePai: '',
+    nomeMae: '',
+    emailResposavel: '',
+    cpfPai: '',
+    cpfMae: '',
+    rgPai: '',
+    rgMae: '',
+    endereco: '',
+    dataNascimento: ''
   });
-  const [servicos, setServicos] = useState({});
 
   const seriesOptions = [
     { name: 'Maternal', series: 'maternal' },
@@ -42,23 +41,52 @@ const StudentRegistration = () => {
     { name: '9° Ano', series: 'ano9' }
   ];
 
- 
-  function handleChange(event){
-    setServico({...servico,[event.target.name]:event.target.value})
+  function handleChange(event) {
+    setServico({ ...servico, [event.target.name]: event.target.value });
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
-    axios.post('http://localhost:8080/api/alunos/', servico).then(result=>{
-      console.log(result)
-      alert("Aluno cadastrado com sucesso!");
-      window.location.reload();
-    })
-    .catch(error => {
-      console.error('CPF já existente', error);
-  });
+    axios.post('http://localhost:8080/api/alunos/', servico)
+      .then(response => {
+        console.log(response);
+        alert("Aluno cadastrado com sucesso!");
+
+        // Após cadastrar o aluno, agora vamos cadastrar as notas
+        const notas = {
+          media: 0.0,
+          portugues: 0.0,
+          redacao: 0.0,
+          matematica: 0.0,
+          geometria: 0.0,
+          filosofia: 0.0,
+          historia: 0.0,
+          ingles: 0.0,
+          ciencias: 0.0,
+          geografia: 0.0,
+          arte: 0.0,
+          efisica: 0.0,
+          religiao: 0.0,
+          direitoCidadania: 0.0
+        };
+
+        axios.post(`http://localhost:8080/api/classes/adicionar-notas/${servico.cpf}`, notas)
+          .then(response => {
+            console.log(response);
+            alert("Notas cadastradas com sucesso!");
+            window.location.reload(); // Recarrega a página após cadastrar notas
+          })
+          .catch(error => {
+            console.error('Erro ao cadastrar notas:', error);
+            alert('Erro ao cadastrar notas. Verifique os campos e tente novamente.');
+          });
+      })
+      .catch(error => {
+        console.error('Erro ao cadastrar aluno:', error);
+        alert('Erro ao cadastrar aluno. Verifique os campos e tente novamente.');
+      });
   }
-  
+
   return (
     <div className="containr">
       <form onSubmit={handleSubmit}>
@@ -115,7 +143,7 @@ const StudentRegistration = () => {
         </div>
         <div className="student-form">
           <label>Endereço:</label>
-          <input type="text" name="endereco" value={servico.endereco} onChange={handleChange}  />
+          <input type="text" name="endereco" value={servico.endereco} onChange={handleChange} />
         </div>
         <div className="student-form">
           <label>CPF:</label>
@@ -146,23 +174,23 @@ const StudentRegistration = () => {
         </div>
         <div className="parent-form">
           <label>Email do Responsável:</label>
-          <input type="email" name="emailResposavel" value={servico.emailResposavel} onChange={handleChange}  />
+          <input type="email" name="emailResposavel" value={servico.emailResposavel} onChange={handleChange} />
         </div>
         <div className="parent-form">
           <label>CPF do Pai:</label>
-          <input type="text" name="cpfPai" value={servico.cpfPai} onChange={handleChange}  />
+          <input type="text" name="cpfPai" value={servico.cpfPai} onChange={handleChange} />
         </div>
         <div className="parent-form">
           <label>CPF da Mãe:</label>
-          <input type="text" name="cpfMae" value={servico.cpfMae} onChange={handleChange}  />
+          <input type="text" name="cpfMae" value={servico.cpfMae} onChange={handleChange} />
         </div>
         <div className="parent-form">
           <label>RG do Pai:</label>
-          <input type="text" name="rgPai" value={servico.rgPai} onChange={handleChange}  />
+          <input type="text" name="rgPai" value={servico.rgPai} onChange={handleChange} />
         </div>
         <div className="parent-form">
           <label>RG da Mãe:</label>
-          <input type="text" name="rgMae" value={servico.rgMae} onChange={handleChange}  />
+          <input type="text" name="rgMae" value={servico.rgMae} onChange={handleChange} />
         </div>
         <input type="submit" value="Cadastrar"></input>
       </form>
@@ -171,3 +199,4 @@ const StudentRegistration = () => {
 };
 
 export default StudentRegistration;
+

@@ -1,37 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from 'axios'; // Importe o axios
+import axios from 'axios';
 import "./grade.css";
 
 function GradeDisc() {
   const { subject } = useParams();
 
-  // Simulated student data
-  const students = [
-    { name: "Mayron Wilke Ferreira Freire", series: "Maternal II", cpf: "142.250.044-65", gender: "Masculino", grade: '' },
-    { name: "Mônica dos Santos Ferreira", series: "9° Ano", cpf: "123.123.123-87", gender: "Feminino", grade: '' },
-    // Add more students as needed
-  ];
+  // Estado para armazenar os alunos e as notas dos alunos
+  const [students, setStudents] = useState([]);
+  const [studentGrades, setStudentGrades] = useState([]);
 
-  // Estado para armazenar as notas dos alunos
-  const [studentGrades, setStudentGrades] = useState(students.map(student => ({ ...student })));
+  useEffect(() => {
+    // Faça uma chamada ao backend para obter os dados dos alunos
+    axios.get(`http://localhost:8080/api/alunos/`)
+      .then(response => {
+        setStudents(response.data);
+        setStudentGrades(response.data.map(student => ({
+          ...student,
+          media: parseFloat(student.notas?.find(nota => nota.materia === subject)?.media) || 0,
+          portugues: parseFloat(student.notas?.find(nota => nota.materia === 'portugues')?.media) || 0
+        })));
+      })
+      .catch(error => console.error('Erro ao buscar alunos:', error));
+  }, [subject]);
 
   // Função para atualizar a nota de um aluno
-  const updateGrade = (index, grade) => {
+  const updateGrade = (index, media, type) => {
     const updatedGrades = [...studentGrades];
-    updatedGrades[index].grade = grade;
+    if (type === "media") {
+      updatedGrades[index].media = parseFloat(media); // Converte para número float
+    } else if (type === "portugues") {
+      updatedGrades[index].portugues = parseFloat(media); // Converte para número float
+    }
     setStudentGrades(updatedGrades);
   };
 
-  // Função para enviar as notas para o backend
+  // Função para enviar as notas para o backend usando PUT
   const sendGrades = () => {
-    const gradesToSend = studentGrades.map(student => ({ cpf: student.cpf, grade: student.grade }));
-    axios.post(`http://localhost:5000/adicionar-notas/${subject}`, gradesToSend)
-      .then(response => {
-        console.log('Notas enviadas com sucesso:', response.data);
-        // Se necessário, lógica adicional após o envio bem-sucedido
-      })
-      .catch(error => console.error('Erro ao enviar notas:', error));
+    studentGrades.forEach(student => {
+      const { media, portugues } = student;
+
+      // Verifica se as notas são maiores que 0.1 antes de enviar
+      if (media > 0.1 || portugues > 0.1) {
+        const gradeData = {
+          media,
+          portugues
+          // Adicione outras notas conforme necessário
+        };
+
+        axios.put(`http://localhost:8080/api/classes/editar-notas/${student.cpf}`, gradeData)
+          .then(response => {
+            console.log(`Notas atualizadas com sucesso para o CPF ${student.cpf}:`, response.data);
+          })
+          .catch(error => console.error(`Erro ao atualizar notas para o CPF ${student.cpf}:`, error));
+      } else {
+        console.log(`Notas não foram atualizadas para o CPF ${student.cpf} porque são menores ou iguais a 0.1`);
+      }
+    });
   };
 
   return (
@@ -47,6 +72,7 @@ function GradeDisc() {
             <p>CPF</p>
             <p>Sexo</p>
             <p>Nota</p>
+            <p>Português</p>
           </div>
           {studentGrades.map((student, index) => (
             <div className="student-grade" key={index}>
@@ -54,17 +80,18 @@ function GradeDisc() {
                 <input name="dummy" type="checkbox" />
                 <span className="checkmark"></span>
               </label>
-              <p>{student.name}</p>
-              <p>{student.series}</p>
+              <p>{student.nomeAluno}</p>
+              <p>{student.serieAno}</p>
               <p>{student.cpf}</p>
-              <p>{student.gender}</p>
+              <p>{student.genero}</p>
               <input 
                 className="grade-input" 
-                placeholder="Nota" 
-                name="grade" 
-                type="number"
-                value={student.grade} 
-                onChange={(e) => updateGrade(index, e.target.value)} 
+                placeholder="Português" 
+                name="portugues" 
+                type="number" // Mantido como type="number"
+                step="0.1" // Permite decimais
+                value={student.portugues} // Exemplo de exibição da nota de português
+                onChange={(e) => updateGrade(index, e.target.value, "portugues")} 
               />
             </div>
           ))}
