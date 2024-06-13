@@ -85,24 +85,61 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 120px;
+  padding: 30px 50px; /* Ajuste de padding para ser mais proporcional */
   background-color: #004266;
   color: #fff;
   cursor: pointer;
   box-sizing: border-box;
   overflow: hidden;
-  transition: background-color 0.3s;
-  width: 340px;
+  transition: background-color 0.3s, transform 0.2s; /* Adicionada transição para transformação */
+  width: 100%;
   border-radius: 15px;
+  border: none; /* Remove a borda padrão */
+  font-size: 1rem; /* Tamanho da fonte ajustável */
+  text-align: center;
+  user-select: none; /* Impede a seleção de texto */
 }
 
 .button:hover {
   background-color: #005D8F;
+  transform: translateY(-3px); /* Adiciona um efeito de elevação */
 }
 
 .button:active {
   background-color: #004080;
+  transform: translateY(0); /* Remove o efeito de elevação */
 }
+
+.button:focus {
+  outline: none; /* Remove o outline padrão */
+  box-shadow: 0 0 0 4px rgba(0, 90, 143, 0.5); /* Adiciona um foco personalizado */
+}
+
+/* Adiciona uma animação de transição suave */
+@keyframes button-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 90, 143, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 90, 143, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 90, 143, 0.4);
+  }
+}
+
+.button:hover {
+  background-color: #005D8F;
+  transform: translateY(-3px);
+  animation: button-glow 1.5s infinite alternate;
+}
+
+.button:active {
+  background-color: #004080;
+  transform: translateY(0);
+  animation: none; /* Remove a animação ao clicar */
+}
+
 
 .button img,
 .button i {
