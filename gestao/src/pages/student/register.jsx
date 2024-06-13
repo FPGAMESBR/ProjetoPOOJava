@@ -2,6 +2,33 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './register.css';
 
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  try {
+      const response = await axios.post('http://localhost:8080/api/alunos/', {
+          // Dados do formulário
+      });
+      console.log('Aluno registrado com sucesso:', response.data);
+  } catch (error) {
+      if (error.response) {
+          // A resposta foi recebida e o servidor respondeu com um status fora do intervalo 2xx
+          if (error.response.status === 409) {
+              console.error('CPF já existente');
+          } else {
+              console.error('Erro na resposta do servidor:', error.response.data);
+          }
+      } else if (error.request) {
+          // A requisição foi feita, mas nenhuma resposta foi recebida
+          console.error('Erro de rede ou servidor inativo:', error.request);
+      } else {
+          // Algo aconteceu ao configurar a requisição
+          console.error('Erro na configuração da requisição:', error.message);
+      }
+  }
+};
+
+
 const StudentRegistration = () => {
   const [servico, setServico] = useState({
     cpf:'',
