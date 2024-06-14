@@ -24,7 +24,45 @@ function StudentButton({ nomeAluno, dataNascimento, alunoStatus, onClick, onDele
             <p>{nomeAluno}</p>
             <p>28/03/2005</p>
             <p>{alunoStatus}</p>
-            <button onClick={onDelete}>Deletar</button>
+            <button className='student-button-delete' onClick={onDelete}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 69 14"
+    class="svgIcon bin-top"
+  >
+    <g clip-path="url(#clip0_35_24)">
+      <path
+        fill="black"
+        d="M20.8232 2.62734L19.9948 4.21304C19.8224 4.54309 19.4808 4.75 19.1085 4.75H4.92857C2.20246 4.75 0 6.87266 0 9.5C0 12.1273 2.20246 14.25 4.92857 14.25H64.0714C66.7975 14.25 69 12.1273 69 9.5C69 6.87266 66.7975 4.75 64.0714 4.75H49.8915C49.5192 4.75 49.1776 4.54309 49.0052 4.21305L48.1768 2.62734C47.3451 1.00938 45.6355 0 43.7719 0H25.2281C23.3645 0 21.6549 1.00938 20.8232 2.62734ZM64.0023 20.0648C64.0397 19.4882 63.5822 19 63.0044 19H5.99556C5.4178 19 4.96025 19.4882 4.99766 20.0648L8.19375 69.3203C8.44018 73.0758 11.6746 76 15.5712 76H53.4288C57.3254 76 60.5598 73.0758 60.8062 69.3203L64.0023 20.0648Z"
+      ></path>
+    </g>
+    <defs>
+      <clipPath id="clip0_35_24">
+        <rect fill="white" height="14" width="69"></rect>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 69 57"
+    class="svgIcon bin-bottom"
+  >
+    <g clip-path="url(#clip0_35_22)">
+      <path
+        fill="black"
+        d="M20.8232 -16.3727L19.9948 -14.787C19.8224 -14.4569 19.4808 -14.25 19.1085 -14.25H4.92857C2.20246 -14.25 0 -12.1273 0 -9.5C0 -6.8727 2.20246 -4.75 4.92857 -4.75H64.0714C66.7975 -4.75 69 -6.8727 69 -9.5C69 -12.1273 66.7975 -14.25 64.0714 -14.25H49.8915C49.5192 -14.25 49.1776 -14.4569 49.0052 -14.787L48.1768 -16.3727C47.3451 -17.9906 45.6355 -19 43.7719 -19H25.2281C23.3645 -19 21.6549 -17.9906 20.8232 -16.3727ZM64.0023 1.0648C64.0397 0.4882 63.5822 0 63.0044 0H5.99556C5.4178 0 4.96025 0.4882 4.99766 1.0648L8.19375 50.3203C8.44018 54.0758 11.6746 57 15.5712 57H53.4288C57.3254 57 60.5598 54.0758 60.8062 50.3203L64.0023 1.0648Z"
+      ></path>
+    </g>
+    <defs>
+      <clipPath id="clip0_35_22">
+        <rect fill="white" height="57" width="69"></rect>
+      </clipPath>
+    </defs>
+  </svg>
+    </button>
             </button>
     );
 }
@@ -34,67 +72,63 @@ function displayNotes(notasArray) {
         <div>
             <h2>Notas</h2>
             <table>
-                <thead>
-                    <tr>
-                        <th>Matéria</th>
-                        <th>Média</th>
-                    </tr>
-                </thead>
                 <tbody>
                     {notasArray.map((nota, index) => (
                         <React.Fragment key={index}>
-                            <tr>
-                                <td>Geografia</td>
-                                <td>{nota.geografia}</td>
-                            </tr>
-                            <tr>
-                                <td>Arte</td>
-                                <td>{nota.arte}</td>
-                            </tr>
-                            <tr>
-                                <td>Redação</td>
-                                <td>{nota.redacao}</td>
-                            </tr>
-                            <tr>
-                                <td>Religião</td>
-                                <td>{nota.religiao}</td>
-                            </tr>
-                            <tr>
-                                <td>Inglês</td>
-                                <td>{nota.ingles}</td>
-                            </tr>
-                            <tr>
-                                <td>Português</td>
-                                <td>{nota.portugues}</td>
-                            </tr>
-                            <tr>
-                                <td>História</td>
-                                <td>{nota.historia}</td>
-                            </tr>
-                            <tr>
-                                <td>Ciências</td>
-                                <td>{nota.ciencias}</td>
-                            </tr>
-                            <tr>
-                                <td>Geometria</td>
-                                <td>{nota.geometria}</td>
-                            </tr>
-                            <tr>
-                                <td>Filosofia</td>
-                                <td>{nota.filosofia}</td>
-                            </tr>
-                            <tr>
-                                <td>Educação Física</td>
-                                <td>{nota.efisica}</td>
-                            </tr>
-                            <tr>
-                                <td>Matemática</td>
-                                <td>{nota.matematica}</td>
-                            </tr>
-                            <tr>
-                                <td>Direito e Cidadania</td>
-                                <td>{nota.direitoCidadania}</td>
-                            </tr>
+                        <div className='student-grades'>
+                            <div>
+                                <h4>Geografia</h4>
+                                <p>{nota.geografia}</p>
+                            </div>
+                            <div>
+                                <h4>Arte</h4>
+                                <p>{nota.arte}</p>
+                            </div>
+                            <div>
+                                <h4>Redação</h4>
+                                <p>{nota.redacao}</p>
+                            </div>
+                            <div>
+                                <h4>Religião</h4>
+                                <p>{nota.religiao}</p>
+                            </div>
+                            <div>
+                                <h4>Inglês</h4>
+                                <p>{nota.ingles}</p>
+                            </div>
+                            <div>
+                                <h4>Português</h4>
+                                <p>{nota.portugues}</p>
+                            </div>
+                            <div>
+                                <h4>História</h4>
+                                <p>{nota.historia}</p>
+                            </div>
+                            <div>
+                                <h4>Ciências</h4>
+                                <p>{nota.ciencias}</p>
+                            </div>
+                            <div>
+                                <h4>Geometria</h4>
+                                <p>{nota.geometria}</p>
+                            </div>
+                            <div>
+                                <h4>Filosofia</h4>
+                                <p>{nota.filosofia}</p>
+                            </div>
+                            <div>
+                                <h4>Educação Física</h4>
+                                <p>{nota.efisica}</p>
+                            </div>
+                            <div>
+                                <h4>Matemática</h4>
+                                <p>{nota.matematica}</p>
+                            </div>
+                            <div>
+                                <h4>Direito e Cidadania</h4>
+                                <p>{nota.direitoCidadania}</p>
+                            </div>
+                        </div>
                         </React.Fragment>
                     ))}
                 </tbody>
@@ -117,7 +151,7 @@ function EditStudentForm({ student, onSave }) {
     };
 
     return (
-        <div>
+        <div className='student-edit'>
             <h2>Editar Aluno</h2>
             <form onSubmit={handleSubmit}>
             <label>Série/Ano:</label>
@@ -140,7 +174,7 @@ function EditStudentForm({ student, onSave }) {
                 <label>Endereço:</label>
                 <input type="text" name="endereco" value={editedStudent.endereco} onChange={handleChange} />
                 {/* Adicione mais campos conforme necessário */}
-                <button type="submit">Salvar</button>
+                <button className='student-edit-button' type="submit">Salvar</button>
             </form>
         </div>
     );
@@ -150,30 +184,94 @@ function StudentInfo({ student, onEdit }) {
     if (!student) return null;
 
     return (
-        <div className='info'>
-            <p>CPF: {student.cpf}</p>
-            <p>RG do Aluno: {student.rgAluno}</p>
-            <p>NIS: {student.nis}</p>
-            <p>Número da Certidão: {student.numeroCertidao}</p>
-            <p>Série/Ano: {student.serieAno}</p>
-            <p>Nome do Aluno: {student.nomeAluno}</p>
-            <p>Status do Aluno: {student.alunoStatus}</p>
-            <p>Naturalidade (Estado): {student.naturnalidadeEstado}</p>
-            <p>Nacionalidade: {student.nacionalidade}</p>
-            <p>Tipo Sanguíneo: {student.tipoSanguinio}</p>
-            <p>Gênero: {student.genero}</p>
-            <p>Nome do Pai: {student.nomePai}</p>
-            <p>Nome da Mãe: {student.nomeMae}</p>
-            <p>E-mail do Responsável: {student.emailResposavel}</p>
-            <p>CPF do Pai: {student.cpfPai}</p>
-            <p>CPF da Mãe: {student.cpfMae}</p>
-            <p>RG do Pai: {student.rgPai}</p>
-            <p>RG da Mãe: {student.rgMae}</p>
-            <p>Endereço: {student.endereco}</p>
-            <p>Data de Cadastro: {student.dataCadastro}</p>
-            <p>Data de Nascimento: {student.dataNascimento}</p>
+        <div className='student-info'>
+            <h1>Informações do Estudante</h1>
+
+            <div className='info'>
+                <div>
+                    <h4>Nome do Aluno:</h4>
+                    <p>{student.nomeAluno}</p>
+                </div>
+                <div>
+                    <h4>Data de Nascimento</h4>
+                    <p>28/03/2005{student.dataNascimento}</p>
+                </div>
+                <div>
+                    <h4>CPF</h4>
+                    <p>{student.cpf}</p>
+                </div>
+                <div>
+                    <h4>RG</h4>
+                    <p>{student.rgAluno}</p>
+                </div>
+                <div>
+                    <h4>NIS</h4>
+                    <p>{student.nis}</p>
+                </div>
+                <div>
+                    <h4>Número da Certidão </h4>
+                    <p>{student.numeroCertidao}</p>
+                </div>
+                <div>
+                    <h4>Naturalidade</h4>
+                    <p>{student.naturnalidadeEstado}</p>
+                </div>
+                <div>
+                    <h4>Nacionalidade</h4>
+                    <p>{student.nacionalidade}</p>
+                </div>
+                <div>
+                    <h4>turma</h4>
+                    <p>{student.serieAno}</p>
+                </div>
+                <div>
+                    <h4>Status da Matricula</h4>
+                    {student.alunoStatus}
+                </div>
+                <div>
+                    <h4>Tipo Sanguíneo</h4>
+                    <p>{student.tipoSanguinio}</p>
+                </div>
+                <div>
+                    <h4>Gênero</h4>
+                    <p>{student.genero}</p>
+                </div>
+                <div>
+                    <h4>E-mail do Responsável</h4>
+                    <p>{student.emailResposavel}</p>
+                </div>
+                <div>
+                    <h4>Endereço</h4>
+                    <p>{student.endereco}</p>
+                </div>
+                <div>
+                    <h4>Nome do Pai</h4>
+                    <p>{student.nomePai}</p>
+                </div>
+                <div>
+                    <h4>Nome da Mãe</h4>
+                    <p>{student.nomeMae}</p>
+                </div>
+                <div>
+                    <h4>CPF do Pai</h4>
+                    <p>{student.cpfPai}</p>
+                </div>
+                <div>
+                    <h4>CPF da Mãe</h4>
+                    <p>{student.cpfMae}</p>
+                </div>
+                <div>
+                    <h4>RG do Pai</h4>
+                    <p>{student.rgPai}</p>
+                </div>
+                <div>
+                    <h4>RG da Mãe</h4>
+                    <p>{student.rgMae}</p>
+                </div>
+                
+            </div>
             {displayNotes(student.notas)}
-            <button onClick={onEdit}>Editar</button>
+            <button className='student-edit-button' onClick={onEdit}>Editar</button>
         </div>
     );
 }

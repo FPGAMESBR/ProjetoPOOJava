@@ -7,10 +7,15 @@ body {
     color: #333;
 }
 
-.list-students > h1 {
+.student-info h1 ,.list-students > h1 {
     font-size: 24px;
     color: #004266;
+    margin-top: 10px;
 }
+
+.list-students > h1 {
+    margin-top: 20px;
+} 
 
 .info-detail {
     font-size: 24px;
@@ -35,6 +40,7 @@ body {
     max-width: 600px;
     background-color: #fff;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .container-students {
@@ -90,32 +96,47 @@ body {
 }
 
 /* Detalhes do estudante */
-.info-detail, .grades-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
+.student-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    }
 
-.info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-}
-
-.info div {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.info h4 {
-    margin-bottom: 5px;
-}
-
-.student-grades {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
-}
+    .info {
+        display: grid;
+        grid-template-columns: 275px 275px;;
+        max-width: 550px;
+        margin: 20px;
+        border: 1px solid #000;
+        border-left: none;
+        border-bottom: none;
+    }
+    
+    .info div {
+        border-bottom: #000 1px solid;
+        border-left: #000 1px solid;
+        padding: 5px;
+    }
+    
+    .info h4 {
+        margin-bottom: 5px;
+    }
+    
+    .info p {
+        margin-bottom: 5px;
+    }
+    
+    h2 {
+        font-size: 24px;
+        color: #004266;
+        margin-bottom: 10px;
+    }
 
 .student-grades .grade {
     padding: 10px;
@@ -125,54 +146,105 @@ body {
     text-align: center;
 }
 
-.student button {
-    background-color: #004266;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 10px;
-    margin: 0 20px 20px 50px;
-    font-size: 2.5vh;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    }
+.student-grades {
+    display: grid;
+    grid-template-columns: 91px 91px 91px 91px 91px 91px ;
+    max-width: 550px;
+}
 
-  .student button:hover {
-    background-color: #005D8F;
-    transform: scale(1.05);
-  }
+.student-grades div {
+    border: #000 1px solid;
+    padding: 5px;
+}
 
-  .info button {
-    background-color: #004266;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 10px;
-    margin: 0 20px 20px 50px;
-    font-size: 2.5vh;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    }
+.student-grades div p {
+    margin-top: 5px;
+}
 
-  .info button:hover {
-    background-color: #005D8F;
-    transform: scale(1.05);
-  }
+/* Formulário de edição */
 
-  form button {
-    margin-top: 20px;
+.student-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+.student-edit input, .student-edit select {
+    width: 100%;
     padding: 10px;
-    border: none;
+    margin: 10px 0;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-form button:hover {
-    background-color: #0056b3;
-}
+  .student-edit-button {
+    background-color: #004266;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 2.5vh;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100px;
+    }
+
+  .student-edit-button:hover {
+    background-color: #005D8F;
+    transform: scale(1.05);
+  }
+
+
+/* botão deletar */
+
+.student-button-delete {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    gap: 2px;
+  }
+  
+  .svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+  }
+  
+  .svgIcon path {
+    fill: white;
+  }
+  
+  .student-button-delete:hover {
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
+    gap: 0;
+  }
+  
+  .bin-top {
+    transform-origin: bottom right;
+  }
+  .student-button-delete:hover .bin-top {
+    transition-duration: 0.5s;
+    transform: rotate(160deg);
+  }
+  
 
 /* Media Queries */
 @media (max-width: 768px) {
