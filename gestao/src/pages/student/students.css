@@ -29,6 +29,8 @@ body {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 40px); /* Altura disponível após o padding */
+    overflow-y: auto;
     margin: 10px;
     padding: 20px;
     width: 100%;
@@ -109,6 +111,55 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     text-align: center;
+}
+
+.student button {
+    background-color: #004266;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin: 0 20px 20px 50px;
+    font-size: 2.5vh;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    }
+
+  .student button:hover {
+    background-color: #005D8F;
+    transform: scale(1.05);
+  }
+
+  .info button {
+    background-color: #004266;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin: 0 20px 20px 50px;
+    font-size: 2.5vh;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    }
+
+  .info button:hover {
+    background-color: #005D8F;
+    transform: scale(1.05);
+  }
+
+  form button {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
 }
 
 /* Media Queries */
