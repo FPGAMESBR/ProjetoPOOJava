@@ -48,7 +48,7 @@ function GradeDisc() {
           // Adicione outras notas conforme necessário
         };
 
-        axios.put(`http://localhost:8080/api/classes/editar-notas/${student.cpf}`, gradeData)
+        axios.put('http://localhost:8080/api/classes/editar-notas/${student.cpf}', gradeData)
           .then(response => {
             console.log(`Notas atualizadas com sucesso para o CPF ${student.cpf}:`, response.data);
           })
@@ -61,8 +61,11 @@ function GradeDisc() {
 
   return (
     <div className="grade-students-page">
+      <header className="Header-grades">
+        <h1>Notas dos Alunos</h1>
+      </header>
       <div className="list-students-grades">
-        <h1>Atribuir Notas para {subject}</h1>
+        <h1>Atribuir notas para {subject}</h1>
 
         <div className="give-grade-list">
           <div className="give-grade-list-header">
@@ -72,7 +75,6 @@ function GradeDisc() {
             <p>CPF</p>
             <p>Sexo</p>
             <p>Nota</p>
-            <p>Português</p>
           </div>
           {studentGrades.map((student, index) => (
             <div className="student-grade" key={index}>
@@ -86,17 +88,16 @@ function GradeDisc() {
               <p>{student.genero}</p>
               <input 
                 className="grade-input" 
-                placeholder="Português" 
+                placeholder="Nota"
                 name="portugues" 
                 type="number" // Mantido como type="number"
                 step="0.1" // Permite decimais
-                value={student.portugues} // Exemplo de exibição da nota de português
                 onChange={(e) => updateGrade(index, e.target.value, "portugues")} 
               />
             </div>
           ))}
         </div>
-        <button onClick={sendGrades}>Enviar Notas</button>
+        <button className="button-send-grades" onClick={sendGrades}>Enviar Notas</button>
       </div>
     </div>
   );

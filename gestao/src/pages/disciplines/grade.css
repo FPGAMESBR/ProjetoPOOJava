@@ -8,14 +8,35 @@ body {
 
 .grade-students-page {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 20px;
 }
+
+.Header-grades {
+  font-size: 24px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: #004266;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list-students-grades h1 {
+    color: #000000;
+    margin: 20px 20px 10px 50px;
+}
+
 .list-students-grades {
     width: 100%;
-    width: 1200px;
+    max-width: 1200px;
     margin: 20px;
-    background-color: aqua;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .give-grade-list {
@@ -33,35 +54,64 @@ body {
     padding: 16px;
     background-color: #004266;
     color: #fff;
+    align-items: center;
+    justify-items: center;
+    border-radius: 10px 10px 0 0;
 }
 
 .student-grade {
     display: grid;
     grid-template-columns: 0.6fr 2fr 1fr 1.5fr 1fr 1fr;
+    justify-content: center;
     width: 1100px;
+    padding: 6px;
     align-items: center;
-    padding: 15px;
+    justify-items: center;
+    border-bottom: #333 1px solid;
+    border-left: #333 1px solid;
+    border-right: #333 1px solid;
+    max-height: 50;
+}
+
+.student-grade:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
+.student-grade:nth-child(even) {
+  background-color: #fafafa;
 }
 
 /* input nota */
-.input {
-    width: 100%;
-    min-height: 40px;
-    padding: 10px;
-    outline: none;
-    background: #e8e8e8;
-    box-shadow: 5px 5px 17px #c8c8c8,
-               -5px -5px 17px #ffffff;
-    border: none;
-    border-radius: 10px;
-    transition: all .5s;
+
+input[type=number] {
+  /* Para navegadores modernos */
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  /* Oculta os botões de aumento e diminuição */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
   }
-  
-  .input:focus {
-    background: #e8e8e8;
-    box-shadow: inset 5px 5px 17px #c8c8c8,
-              inset -5px -5px 17px #ffffff;
+  /* Firefox */
+  &[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
   }
+}
+
+.grade-input {
+    width: 50%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+    text-align: center;
+}
 
 /* Fim input nota */
 
@@ -129,111 +179,23 @@ body {
   .custom-checkbox input[type="checkbox"]:checked + .checkmark {
     transition: background-color 1.3s, border-color 1.3s, color 1.3s, transform 0.3s;
   }
-  
+  /* Fim checkbox */
 
-/*
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
-}
+  /*botão Enviar notas*/
 
+  .button-send-grades {
+    background-color: #004266;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    margin: 0 20px 20px 50px;
+    font-size: 2.5vh;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    }
 
-.grade-students-page {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.list-students-grades {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff; 
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-}
-
-.give-grade-list {
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: space-around; 
-  gap: 15px;
-}
-
-.give-grade-list-header {
-  display: grid;
-  grid-template-columns: 0.6fr 2fr 1fr 1.5fr 1fr 1fr;
-  align-items: center; 
-  padding: 16px;
-  background-color: #004266;
-  color: #fff;
-  border-top-left-radius: 10px; 
-  border-top-right-radius: 10px;
-}
-
-.student-grade {
-  width: calc(50% - 15px); 
-  padding: 15px;
-  border-bottom: 1px solid #ccc; 
-  margin-bottom: 15px; 
-}
-
-.grade-input {
-  width: calc(100% - 20px);
-  min-height: 40px;
-  padding: 10px;
-  outline: none;
-  background: #e8e8e8;
-  border: none;
-  border-radius: 10px;
-  transition: all .3s;
-}
-
-.grade-input:focus {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.custom-checkbox {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  font-size: 16px;
-  color: #333;
-}
-
-.custom-checkbox input[type="checkbox"] {
-  display: none;
-}
-
-.custom-checkbox .checkmark {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #004266; 
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-  transition: all .3s;
-}
-
-.custom-checkbox .checkmark::before {
-  content: "\2713";
-  font-size: 14px; 
-  color: transparent;
-  transition: all .3s;
-}
-
-.custom-checkbox input[type="checkbox"]:checked + .checkmark {
-  background-color: #004266; 
-  border-color: #004266;
-}
-
-.custom-checkbox input[type="checkbox"]:checked + .checkmark::before {
-  color: #fff; 
-}     
-*/
+  .button-send-grades:hover {
+    background-color: #005D8F;
+    transform: scale(1.05);
+  }
