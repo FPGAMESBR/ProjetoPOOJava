@@ -48,7 +48,7 @@ function GradeDisc() {
           // Adicione outras notas conforme necessário
         };
 
-        axios.put('http://localhost:8080/api/classes/editar-notas/${student.cpf}', gradeData)
+        axios.put(`http://localhost:8080/api/classes/editar-notas/${student.cpf}`, gradeData)
           .then(response => {
             console.log(`Notas atualizadas com sucesso para o CPF ${student.cpf}:`, response.data);
           })
