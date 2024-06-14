@@ -17,7 +17,7 @@ const HomePage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/events')
+    axios.get('http://localhost:8080/events')
       .then(response => {
         const eventsFromDb = {};
         response.data.forEach(event => {
@@ -44,7 +44,7 @@ const HomePage = () => {
   const deleteEvent = () => {
     if (selectedDay instanceof Date && !isNaN(selectedDay)) {
       const selectedDate = selectedDay.toISOString().split('T')[0];
-      axios.delete(`http://localhost:5000/events/${selectedDate}`)
+      axios.delete(`http://localhost:8080/events/${selectedDate}`)
         .then(() => {
           const updatedEvents = { ...events };
           delete updatedEvents[selectedDate];
@@ -75,7 +75,7 @@ const HomePage = () => {
     }
   
     const formattedDate = selectedDate.toISOString().split('T')[0];
-    axios.post('http://localhost:5000/events', { date: formattedDate, description, extraInfo })
+    axios.post('http://localhost:8080/events', { date: formattedDate, description, extraInfo })
       .then(() => {
         const updatedEvents = { ...events };
         updatedEvents[formattedDate] = { description, extraInfo };
