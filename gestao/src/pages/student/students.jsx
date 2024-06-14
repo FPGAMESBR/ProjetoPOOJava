@@ -20,13 +20,12 @@ const seriesOptions = [
 
 function StudentButton({ nomeAluno, dataNascimento, alunoStatus, onClick, onDelete }) {
     return (
-        <div className='student'>
+            <button className='student-button' onClick={onClick}>
             <p>{nomeAluno}</p>
-            <p>{dataNascimento}</p>
+            <p>28/03/2005</p>
             <p>{alunoStatus}</p>
-            <button onClick={onClick}>Detalhes</button>
             <button onClick={onDelete}>Deletar</button>
-        </div>
+            </button>
     );
 }
 
@@ -235,6 +234,7 @@ function Students() {
                         <p>Alunos</p>
                         <p>Nascimento</p>
                         <p>Status</p>
+                        <p>Deletar</p>
                     </div>
                     {students.map(student => (
                         <StudentButton
