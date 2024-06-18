@@ -29,7 +29,7 @@ function DiscPage() {
           <ul className="Itens">
             {disciplines.map((discipline) => (
               <li key={discipline.path}>
-                <Link className="disc-link" to={`${discipline.path}?name=${discipline.name}`}>
+                <Link className="disc-link" to={`${discipline.path}?name=${encodeURIComponent(discipline.name)}`}>
                   {discipline.icon} {discipline.name}
                 </Link>
               </li>
