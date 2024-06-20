@@ -5,7 +5,7 @@ import './grade.css';
 function GradesPage() {
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [grades, setGrades] = useState({});  
+  const [grades, setGrades] = useState({});
   const [modifiedGrades, setModifiedGrades] = useState({});
 
   useEffect(() => {
@@ -18,23 +18,52 @@ function GradesPage() {
 
   const handleStudentClick = (student) => {
     setSelectedStudent(student);
-    axios.get(`http://localhost:8080/api/classes/notas-alunos/${student.cpf}`) //back sem essa rota
+    axios.get(`http://localhost:8080/api/classes/notas-alunos`, { params: { cpf: student.cpf } })
       .then(response => {
         console.log(`Notas do aluno ${student.cpf}:`, response.data);
         const studentGrades = response.data;
         if (studentGrades) {
-          setGrades(studentGrades);
+          const gradesObject = extractGrades(studentGrades);
+          setGrades(gradesObject);
+          setModifiedGrades(gradesObject);
         } else {
           setGrades({});
+          setModifiedGrades({});
         }
       })
       .catch(error => console.error(`Erro ao buscar notas para o aluno ${student.cpf}:`, error));
-  };   
+  };
+
+  const extractGrades = (data) => {
+    const subjects = [
+      'portugues',
+      'matematica',
+      'ingles',
+      'redacao',
+      'ciencias',
+      'historia',
+      'geografia',
+      'filosofia',
+      'arte',
+      'efisica',
+      'direitoCidadania',
+      'religiao',
+      'geometria'
+    ];
+
+    const gradesObject = {};
+
+    subjects.forEach((subject, index) => {
+      gradesObject[subject] = data[0][index + 2]; // Ajuste o índice de acordo com a estrutura real dos dados
+    });
+
+    return gradesObject;
+  };
 
   const handleGradeChange = (subject, value) => {
     setModifiedGrades(prevModifiedGrades => ({
       ...prevModifiedGrades,
-      [subject]: parseFloat(value)
+      [subject]: value
     }));
   };
 
@@ -46,10 +75,7 @@ function GradesPage() {
       })
         .then(response => {
           console.log(`Notas atualizadas com sucesso para o CPF ${selectedStudent.cpf}:`, response.data);
-          setSelectedStudent(prevSelectedStudent => ({
-            ...prevSelectedStudent,
-            notas: { ...prevSelectedStudent.notas, ...modifiedGrades }
-          }));
+          setGrades({ ...modifiedGrades });
         })
         .catch(error => console.error(`Erro ao atualizar notas para o CPF ${selectedStudent.cpf}:`, error));
       setModifiedGrades({});
@@ -82,33 +108,33 @@ function GradesPage() {
         <div className="edit-grades">
           <h1>Editar Notas de {selectedStudent.nomeAluno}</h1>
           <div className="give-grade-list">
-          {[
-            'portugues',
-            'matematica',
-            'ingles',
-            'redacao',
-            'ciencias',
-            'historia',
-            'geografia',
-            'filosofia',
-            'arte',
-            'efisica',
-            'direitoCidadania',
-            'religiao',
-            'geometria' 
+            {[
+              'portugues',
+              'matematica',
+              'ingles',
+              'redacao',
+              'ciencias',
+              'historia',
+              'geografia',
+              'filosofia',
+              'arte',
+              'efisica',
+              'direitoCidadania',
+              'religiao',
+              'geometria'
             ].map(subject => (
-            <div key={subject} className="grade-input-container">
+              <div key={subject} className="grade-input-container">
                 <label className="subject-label">{subject}</label>
-                <input 
-                    className="grade-input" 
-                    placeholder="Nota"
-                    name={subject} 
-                    type="number"
-                    step="0.1"
-                    value={grades[subject] || ''}
-                    onChange={(e) => handleGradeChange(subject, e.target.value)} 
+                <input
+                  className="grade-input"
+                  placeholder="Nota"
+                  name={subject}
+                  type="number"
+                  step="0.1"
+                  value={modifiedGrades[subject] !== undefined ? modifiedGrades[subject] : ''}
+                  onChange={(e) => handleGradeChange(subject, e.target.value)}
                 />
-            </div>
+              </div>
             ))}
           </div>
           <button className="button-send-grades" onClick={sendGrades}>Enviar Notas</button>
